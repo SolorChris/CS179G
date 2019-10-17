@@ -24,11 +24,11 @@ class UploadPage extends React.Component {
                 <button name= "browseButton"  className="normalButton" type="button" onClick={this.handleClick}>browse your file</button>
                 <button name= "confirmButton" className="normalButton" type="button" onClick={this.handleClick}>confirm</button>
                 <form>
-                    <input type="text" name="streetNumber" placeholder="street number"></input>
-                    <input type="text" name="streetName" placeholder="street name"></input>
-                    <input type="text" name="city" placeholder="city"></input>
-                    <input type="text" name="state" placeholder="state"></input>
-                    <input type="text" name="zipcode" placeholder="zipcode"></input>
+                    <input type="text" name="streetNumber" className="textField" placeholder="street number"></input>
+                    <input type="text" name="streetName" className="textField" placeholder="street name"></input>
+                    <input type="text" name="city" className="textField" placeholder="city"></input>
+                    <input type="text" name="state" className="textField" placeholder="state"></input>
+                    <input type="text" name="zipcode" className="textField" placeholder="zipcode"></input>
                 </form>
             </div>
         )
