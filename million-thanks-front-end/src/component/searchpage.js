@@ -21,6 +21,15 @@ class SearchPage extends React.Component {
                     <button name= "uploadButton" type="button" className="notClickButton" onClick={this.handleClick}>upload</button>
                     <button name= "searchButton" type="button" className="clickButton" onClick={this.handleClick}>search</button>
                 </div>
+                <input type="text" name="searchField" className="textField" placeholder="enter address"></input>
+                <select>
+                    <option value="fullAddress">search by full address</option>
+                    <option value="addressNumber">search by address number</option>
+                    <option value="streetName">search by street name</option>
+                    <option value="state">search by state</option>
+                    <option value="zipcode">search by zipcode</option>
+                </select>
+                <button name= "submitButton" type="button" className="normalButton" onClick={this.handleClick}>submit</button>
             </div>
         )
     }
