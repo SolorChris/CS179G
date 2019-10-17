@@ -1,4 +1,6 @@
 import React from 'react'
+import '../index.css'
+import logo from './logo.png' 
 
 class SearchPage extends React.Component {
     constructor() {
@@ -14,9 +16,11 @@ class SearchPage extends React.Component {
     render() {
         return(
             <div>
-                <p>Search Page</p>
-                <button type="button" name="uploadButton" onClick={this.handleClick}>upload</button>
-                <button type="button" name="searchButton" onClick={this.handleClick}>search</button>
+                <div className="header">
+                    <img src={logo} alt={"million thanks"} height="70" width="150"/>
+                    <button name= "uploadButton" type="button" className="notClickButton" onClick={this.handleClick}>upload</button>
+                    <button name= "searchButton" type="button" className="clickButton" onClick={this.handleClick}>search</button>
+                </div>
             </div>
         )
     }

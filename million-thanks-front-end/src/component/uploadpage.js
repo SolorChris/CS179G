@@ -1,4 +1,6 @@
 import React from 'react'
+import '../index.css'
+import logo from './logo.png'
 
 class UploadPage extends React.Component {
     constructor() {
@@ -14,11 +16,13 @@ class UploadPage extends React.Component {
     render() {
         return(
             <div>
-                <p>upload page</p>
-                <button name= "uploadButton" type="button" onClick={this.handleClick}>upload</button>
-                <button name= "searchButton" type="button" onClick={this.handleClick}>search</button>
-                <button name= "browseButton" type="button" onClick={this.handleClick}>browse your file</button>
-                <button name= "confirmButton" type="button" onClick={this.handleClick}>confirm</button>
+                <div className="header">
+                    <img src={logo} alt={"million thanks"} height="70" width="150"/>
+                    <button name= "uploadButton" type="button" className="clickButton" onClick={this.handleClick}>upload</button>
+                    <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
+                </div>
+                <button name= "browseButton"  className="normalButton" type="button" onClick={this.handleClick}>browse your file</button>
+                <button name= "confirmButton" className="normalButton" type="button" onClick={this.handleClick}>confirm</button>
                 <form>
                     <input type="text" name="streetNumber" placeholder="street number"></input>
                     <input type="text" name="streetName" placeholder="street name"></input>
