@@ -30,4 +30,4 @@ def detect_document(path):
                         print('\tSymbol: {} (confidence: {})'.format(
                             symbol.text, symbol.confidence))
 
-detect_document('test1.jpg')
+detect_document('images/IMG_2827.JPG')
