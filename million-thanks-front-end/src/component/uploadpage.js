@@ -14,6 +14,7 @@ class UploadPage extends React.Component {
         }
 
         this.handleClick = this.handleClick.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
     handleClick(event) {
@@ -22,6 +23,24 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === 'browseButton') {
             // TODO: handle upload image
+        }
+    }
+
+    handleChange(event) {
+        if (event.target.name === 'streetName') {
+            this.setState({streetName : event.target.value})
+        }
+        else if (event.target.name === 'streetNumber') {
+            this.setState({streetNumber : event.target.value})
+        }
+        else if (event.target.name === 'city') {
+            this.setState({city : event.target.value})
+        }
+        else if (event.target.name === 'state') {
+            this.setState({state : event.target.value})
+        }
+        else if (event.target.name === 'zipcode') {
+            this.setState({zipcode : event.target.value})
         }
     }
 
@@ -36,11 +55,11 @@ class UploadPage extends React.Component {
                 <button name= "browseButton"  className="normalButton" type="button" onClick={this.handleClick}>browse your file</button>
                 <button name= "confirmButton" className="normalButton" type="button" onClick={this.handleClick}>confirm</button>
                 <form>
-                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber}></input>
-                    <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName}></input>
-                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.city}></input>
-                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.state}></input>
-                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode}></input>
+                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
+                    <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input>
+                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
+                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
+                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
                 </form>
             </div>
         )
