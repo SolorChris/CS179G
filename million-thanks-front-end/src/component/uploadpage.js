@@ -1,6 +1,7 @@
 import React from 'react'
 import '../index.css'
 import logo from './logo.png'
+import axios from 'axios'
 
 class UploadPage extends React.Component {
     constructor() {
@@ -10,7 +11,8 @@ class UploadPage extends React.Component {
             streetName : "",
             city : "",
             state : "",
-            zipcode : ""
+            zipcode : "",
+            uploadFile: null
         }
 
         this.handleClick = this.handleClick.bind(this)
@@ -21,8 +23,16 @@ class UploadPage extends React.Component {
         if (event.target.name === 'searchButton') {
             this.props.history.push('/search')
         }
-        else if (event.target.name === 'browseButton') {
-            // TODO: handle upload image
+        else if (event.target.name === 'uploadFile') {
+            console.log(this.state.uploadFile)
+            const image = new FormData()
+            image.append('file', this.state.uploadFile)
+            console.log(image)
+            axios.post('http://localhost:3100/upload', image, {
+            })
+            .then(res => {
+                console.log(res.statusText)
+            })
         }
     }
 
@@ -42,6 +52,9 @@ class UploadPage extends React.Component {
         else if (event.target.name === 'zipcode') {
             this.setState({zipcode : event.target.value})
         }
+        else if (event.target.name === 'selectFile') {
+            this.setState({uploadFile : event.target.files[0]})
+        }
     }
 
     render() {
@@ -52,7 +65,8 @@ class UploadPage extends React.Component {
                     <button name= "uploadButton" type="button" className="clickButton" onClick={this.handleClick}>upload</button>
                     <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
                 </div>
-                <button name= "browseButton"  className="normalButton" type="button" onClick={this.handleClick}>browse your file</button>
+                <input name= "selectFile" type="file" onChange={this.handleChange}/>
+                <button name= "uploadFile" className="normalButton" type="button" onClick={this.handleClick}>upload file</button>
                 <button name= "confirmButton" className="normalButton" type="button" onClick={this.handleClick}>confirm</button>
                 <form>
                     <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
