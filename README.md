@@ -23,3 +23,5 @@ variable value: point it to the json file in the ocr folder.
 also pip install --upgrade google-cloud-vision
 
 go wild.
+
+go to million-thanks-back-end directory and type 'node receiveFile.js' to run code that receive upload file from front-end
