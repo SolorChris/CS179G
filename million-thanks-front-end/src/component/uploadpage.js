@@ -22,6 +22,18 @@ class UploadPage extends React.Component {
     handleClick(event) {
         if (event.target.name === 'searchButton') {
             this.props.history.push('/search')
+            fetch('http://localhost:3000/address')
+              .then(response => {
+                  console.log(response)
+            return response.json()
+              })
+  .then(data => {
+    // Work with JSON data here
+    console.log(data)
+  })
+  .catch(err => {
+    // Do something for an error here
+  })
         }
         else if (event.target.name === 'uploadFile') {
             console.log(this.state.uploadFile)

@@ -69,7 +69,7 @@ def detect_document(path):
 
 for filename in os.listdir("uploadimage"):
     if filename.lower().endswith(".jpg"):
-        output = detect_document("uploadimage\\" + filename)
+        output = detect_document("uploadimage/" + filename)
         output = output.replace(",", "")
         outputsplit = output.split()
         # zip = outputsplit[len(outputsplit)-1]
@@ -103,5 +103,9 @@ for filename in os.listdir("uploadimage"):
         print(json_data)
 
         r = requests.get('http://localhost:3000/address', params=json_data)
-
+        if r.status_code == 200:
+            print("s")
+        elif r.status_code == 404:
+            print("fail")
         print(r.url)
+        
