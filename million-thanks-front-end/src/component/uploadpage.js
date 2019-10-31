@@ -71,8 +71,8 @@ class UploadPage extends React.Component {
                     <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
                 </div>
                 <input name= "selectFile" type="file" onChange={this.handleChange}/>
-                <button name= "uploadFile" className="normalButton" type="button" onClick={this.handleClick}>upload selected file</button>
-                <button name= "confirmButton" className="normalButton" type="button" onClick={this.handleClick}>confirm address</button>
+                <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
+                <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
                 <form>
                     <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
                     <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input>
