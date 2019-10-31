@@ -3,6 +3,11 @@ import zipfile
 import json
 import usaddress
 import requests
+from flask import Flask
+from flask import jsonify
+from flask_cors import CORS
+app = Flask(__name__)
+CORS(app)
 
 def detect_document(path):
     returnstring = ""
@@ -101,11 +106,16 @@ for filename in os.listdir("uploadimage"):
 
         json_data = json.dumps(data)
         print(json_data)
-
+        '''
         r = requests.get('http://localhost:3000/address', params=json_data)
         if r.status_code == 200:
             print("s")
         elif r.status_code == 404:
             print("fail")
         print(r.url)
+        '''
+        @app.route('/')
+        def processjson():
+            return json_data
+        app.run(host='localhost', port=3200)
         
