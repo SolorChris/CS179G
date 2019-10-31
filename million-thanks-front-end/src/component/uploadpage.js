@@ -33,10 +33,20 @@ class UploadPage extends React.Component {
             .then(res => {
                 console.log(res.statusText)
             })
-
             // TODO:: Take the address from back-end and assign it to state
+            fetch('http://localhost:3200/')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                this.setState({
+                    streetName: data['address'],
+                    city: data['city'],
+                    state: data['state'],
+                    zipcode: data['zip']
+                })
+            })
         }
-        else if (event.target.name === "comfirmButton") {
+        else if (event.target.name === "confirmButton") {
             // TODO:: send the correct address to back-end to insert into database
         }
     }

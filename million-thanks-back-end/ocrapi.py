@@ -29,5 +29,3 @@ def detect_document(path):
                     for symbol in word.symbols:
                         print('\tSymbol: {} (confidence: {})'.format(
                             symbol.text, symbol.confidence))
-
-detect_document('images/IMG_2827.JPG')
