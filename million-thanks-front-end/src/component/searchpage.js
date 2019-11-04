@@ -1,13 +1,21 @@
 import React from 'react'
 import '../index.css'
 import logo from './logo.png' 
+import { makeStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 class SearchPage extends React.Component {
     constructor() {
         super()
         this.state = {
-            selectedValue: "",
-            displayTable: false
+            selectedValue: "fullAddress",
+            displayTable: false,
+            address: null
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -21,6 +29,9 @@ class SearchPage extends React.Component {
             // TODO:: write query and send it to backend to run it on database
             if (this.state.selectedValue === "fullAddress") {
                 console.log(this.state.selectedValue)
+                let addr = [{'street':'123 hello','city':'river','state':'CA','zipcode':'11111'},
+                        {'street':'321 world','city':'side','state':'CA','zipcode':'22222'}]
+                this.setState({address:addr})
             }
             else if (this.state.selectedValue === "addressNumber") {
                 console.log(this.state.selectedValue)
@@ -58,11 +69,43 @@ class SearchPage extends React.Component {
     
     renderElement() {
         // TODO:: get the data from database and implement the table
+        const classes = makeStyles(theme => ({
+            root: {
+            width: '100%',
+            marginTop: theme.spacing(3),
+            overflowX: 'auto',
+            },
+            table: {
+            minWidth: 650,
+            },
+        }))
+        console.log(this.state.address)
         if (this.state.displayTable === true) {
             return (
-                <div>
-                    <p>table diplaying .....</p>
-                </div>
+                <Paper className={classes.root}>
+                <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                    <TableCell>street</TableCell>
+                    <TableCell align="right">city</TableCell>
+                    <TableCell align="right">state</TableCell>
+                    <TableCell align="right">zipcode</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {this.state.address.map(row => (
+                    <TableRow key={row.street}>
+                        <TableCell component="th" scope="row">
+                        {row.street}
+                        </TableCell>
+                        <TableCell align="right">{row.city}</TableCell>
+                        <TableCell align="right">{row.state}</TableCell>
+                        <TableCell align="right">{row.zipcode}</TableCell>
+                    </TableRow>
+                    ))}
+                </TableBody>
+                </Table>
+            </Paper>
             )
         }
         return(<p></p>)
