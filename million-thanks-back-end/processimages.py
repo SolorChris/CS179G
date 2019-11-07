@@ -84,10 +84,12 @@ for filename in os.listdir("uploadimage"):
 
         parsedaddress = usaddress.tag(output)
         # print(parsedaddress)  
+        print(parsedaddress[0])
         print(parsedaddress[0]['Recipient'])
         name = parsedaddress[0]['Recipient']
         # print(parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType'])
         # address = parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']
+        streetnumber = parsedaddress[0]['AddressNumber']
         address = parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']        
         print(parsedaddress[0]['PlaceName'])
         city = parsedaddress[0]['PlaceName']
@@ -98,6 +100,7 @@ for filename in os.listdir("uploadimage"):
 
         
         data = {}
+        data['streetnumber'] = streetnumber
         data['name'] = name
         data['address'] = address
         data['city'] = city
@@ -106,16 +109,12 @@ for filename in os.listdir("uploadimage"):
 
         json_data = json.dumps(data)
         print(json_data)
-        '''
-        r = requests.get('http://localhost:3000/address', params=json_data)
-        if r.status_code == 200:
-            print("s")
-        elif r.status_code == 404:
-            print("fail")
-        print(r.url)
-        '''
+        
         @app.route('/')
         def processjson():
             return json_data
         app.run(host='localhost', port=3200)
-        
+
+        @app.route('/test', methods = ['POST'])
+        def index():
+            return json_data
