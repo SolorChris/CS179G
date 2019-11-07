@@ -71,7 +71,7 @@ def detect_document(path):
 #         imgcount += 1
 #         print("-------------------------------\n")
 
-
+jsonarray = []
 for filename in os.listdir("uploadimage"):
     if filename.lower().endswith(".jpg"):
         output = detect_document("uploadimage/" + filename)
@@ -84,18 +84,18 @@ for filename in os.listdir("uploadimage"):
 
         parsedaddress = usaddress.tag(output)
         # print(parsedaddress)  
-        print(parsedaddress[0])
-        print(parsedaddress[0]['Recipient'])
+        # print(parsedaddress[0])
+        # print(parsedaddress[0]['Recipient'])
         name = parsedaddress[0]['Recipient']
         # print(parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType'])
         # address = parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']
         streetnumber = parsedaddress[0]['AddressNumber']
         address = parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']        
-        print(parsedaddress[0]['PlaceName'])
+        # print(parsedaddress[0]['PlaceName'])
         city = parsedaddress[0]['PlaceName']
-        print(parsedaddress[0]['StateName'])
+        # print(parsedaddress[0]['StateName'])
         state = parsedaddress[0]['StateName']
-        print(parsedaddress[0]['ZipCode'])
+        # print(parsedaddress[0]['ZipCode'])
         zip = parsedaddress[0]['ZipCode']
 
         
@@ -107,13 +107,15 @@ for filename in os.listdir("uploadimage"):
         data['state'] = state
         data['zip'] = zip
 
-        json_data = json.dumps(data)
-        print(json_data)
-        @app.route('/')
-        def processjson():
-            return json_data
-        app.run(host='localhost', port=3200)
+        jsonarray.append(data)
 
-        @app.route('/test', methods = ['POST'])
-        def index():
-            return json_data
+json_data = json.dumps(jsonarray)
+print(json_data)
+@app.route('/')
+def processjson():
+    return json_data
+app.run(host='localhost', port=3200)
+
+# @app.route('/test', methods = ['POST'])
+# def index():
+#     return json_data
