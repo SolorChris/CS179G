@@ -41,9 +41,9 @@ class UploadPage extends React.Component {
                 this.setState({uploadFile : null})
                 this.setState({display : this.state.getimage})
             })
-           
-   //this.setState({     getimage : URL.createObjectURL(event.target.files[0]) })
-            // TODO:: Take the address from back-end and assign it to state
+            // give signal to run python script
+            fetch('http:/localhost:3200/readytorun?run=yes')
+            // get address
             fetch('http://localhost:3200/')
             .then(response => response.json())
             .then(data => {

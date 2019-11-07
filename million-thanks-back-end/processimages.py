@@ -109,7 +109,6 @@ for filename in os.listdir("uploadimage"):
 
         json_data = json.dumps(data)
         print(json_data)
-        
         @app.route('/')
         def processjson():
             return json_data
