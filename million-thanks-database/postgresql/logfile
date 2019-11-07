@@ -1,0 +1,5 @@
+2019-11-06 15:37:14.128 PST [695] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2019-11-06 15:37:14.128 PST [695] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2019-11-06 15:37:14.128 PST [695] WARNING:  could not create listen socket for "localhost"
+2019-11-06 15:37:14.128 PST [695] FATAL:  could not create any TCP/IP sockets
+2019-11-06 15:37:14.128 PST [695] LOG:  database system is shut down

@@ -1,0 +1,20 @@
+{
+  "name": "million-thanks-database",
+  "version": "1.0.0",
+  "description": "provides a means to connect with the database",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Ian Bonafede",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "consolidate": "^0.15.1",
+    "dust": "*",
+    "dustjs-helpers": "^1.7.4",
+    "dustjs-linkedin": "^2.7.5",
+    "express": "^4.17.1",
+    "pg": "^7.12.1"
+  }
+}

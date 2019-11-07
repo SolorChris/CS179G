@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { Checkbox, Tab } from '@material-ui/core'
+import {addCustomer, search} from './db_connect'
 
 class SearchPage extends React.Component {
     constructor() {
@@ -47,6 +48,7 @@ class SearchPage extends React.Component {
                 console.log(this.state.selectedValue)
             }
             this.setState({displayTable : true})
+            search(this.state.selectedValue, this.state.address)
         }
     }
 
