@@ -106,14 +106,7 @@ for filename in os.listdir("uploadimage"):
 
         json_data = json.dumps(data)
         print(json_data)
-        '''
-        r = requests.get('http://localhost:3000/address', params=json_data)
-        if r.status_code == 200:
-            print("s")
-        elif r.status_code == 404:
-            print("fail")
-        print(r.url)
-        '''
+
         @app.route('/')
         def processjson():
             return json_data

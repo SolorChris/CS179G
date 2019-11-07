@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import { Checkbox, Tab } from '@material-ui/core'
 
 class SearchPage extends React.Component {
     constructor() {
@@ -29,8 +30,8 @@ class SearchPage extends React.Component {
             // TODO:: write query and send it to backend to run it on database
             if (this.state.selectedValue === "fullAddress") {
                 console.log(this.state.selectedValue)
-                let addr = [{'street':'123 hello','city':'river','state':'CA','zipcode':'11111'},
-                        {'street':'321 world','city':'side','state':'CA','zipcode':'22222'}]
+                let addr = [{'sender':'me','street':'123 hello','city':'riverside','state':'CA','zipcode':'11111'},
+                        {'sender':'me','street':'321 world','city':'anaheim','state':'CA','zipcode':'22222'}]
                 this.setState({address:addr})
             }
             else if (this.state.selectedValue === "addressNumber") {
@@ -82,30 +83,39 @@ class SearchPage extends React.Component {
         console.log(this.state.address)
         if (this.state.displayTable === true) {
             return (
+            <div>
                 <Paper className={classes.root}>
                 <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                    <TableCell>street</TableCell>
-                    <TableCell align="right">city</TableCell>
-                    <TableCell align="right">state</TableCell>
-                    <TableCell align="right">zipcode</TableCell>
+                        <TableCell>Sender</TableCell>
+                        <TableCell align="right">Street</TableCell>
+                        <TableCell align="right">City</TableCell>
+                        <TableCell align="right">State</TableCell>
+                        <TableCell align="right">Zipcode</TableCell>
+                        <TableCell align="right">Select Address</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {this.state.address.map(row => (
                     <TableRow key={row.street}>
                         <TableCell component="th" scope="row">
-                        {row.street}
+                        {row.sender}
                         </TableCell>
+                        <TableCell align="right">{row.street}</TableCell>
                         <TableCell align="right">{row.city}</TableCell>
                         <TableCell align="right">{row.state}</TableCell>
                         <TableCell align="right">{row.zipcode}</TableCell>
+                        <TableCell align="right">
+                            <Checkbox/>
+                        </TableCell>
                     </TableRow>
                     ))}
                 </TableBody>
                 </Table>
-            </Paper>
+                </Paper>
+                <button name= "submitAddress" type="button" className="normalButton3" onClick={this.handleClick}>Generate Letter</button>
+            </div>
             )
         }
         return(<p></p>)
@@ -128,7 +138,10 @@ class SearchPage extends React.Component {
                     <option value="zipcode">search by zipcode</option>
                 </select>
                 <button name= "submitButton" type="button" className="normalButton3" onClick={this.handleClick}>submit</button>
-                <div>{this.renderElement()}</div>
+                <div>
+                    {this.renderElement()}
+                </div>
+
             </div>
         )
     }
