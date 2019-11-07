@@ -8,6 +8,7 @@ class UploadPage extends React.Component {
     constructor() {
         super()
         this.state = {
+            recipient : "",
             streetNumber : "",
             streetName : "",
             city : "",
@@ -47,7 +48,9 @@ class UploadPage extends React.Component {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
-                this.setState({
+                this.setState({ 
+                    recipient: data['name'],
+                    streetNumber: data['streetnumber'],
                     streetName: data['address'],
                     city: data['city'],
                     state: data['state'],
@@ -99,6 +102,7 @@ class UploadPage extends React.Component {
                 <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
                 <form>
+                    <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.recipient} onChange={this.handleChange}></input>
                     <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
                     <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input>
                     <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
