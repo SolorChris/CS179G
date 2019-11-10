@@ -29,6 +29,10 @@ app.post('/upload',function(req, res) {
     })
 })
 
+app.post('/test', function(req, res) {
+    
+})
+
 app.listen(3100, function() {
     console.log('receiving file from port 3100')
 })

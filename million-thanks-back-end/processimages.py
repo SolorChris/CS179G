@@ -72,8 +72,6 @@ def detect_document(path):
 #         imgcount += 1
 #         print("-------------------------------\n")
 
-
-
 jsonarray = []
 for filename in os.listdir("uploadimage"):
     if filename.lower().endswith(".jpg"):
@@ -118,3 +116,7 @@ print(json_data)
 def processjson():
     return json_data
 app.run(host='localhost', port=3200)
+
+# @app.route('/test', methods = ['POST'])
+# def index():
+#     return json_data
