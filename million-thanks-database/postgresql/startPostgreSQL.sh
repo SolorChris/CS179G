@@ -1,5 +1,5 @@
 #! /bin/bash
-folder=/tmp/CPC_DB
+folder=/tmp/CPC
 export PGDATA=$folder/data
 export PGSOCKETS=$folder/sockets
 

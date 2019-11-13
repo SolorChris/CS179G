@@ -3,17 +3,17 @@ import '../index.css'
 import logo from './images/assets/banner_logo.png'
 import upbox from './images/assets/page_upload_button_drag_and_drop.png'
 import axios from 'axios'
+import {add} from './db_connect'
 
 class UploadPage extends React.Component {
     constructor() {
         super()
         this.state = {
-            recipient : "",
-            streetNumber : "",
-            streetName : "",
-            city : "",
-            state : "",
-            zipcode : "",
+            customer_name : "",
+            customer_street : "",
+            customer_city : "",
+            customer_state : "",
+            customer_zip : "",
             uploadFile: null,
             getimage: null,
             display: null,
@@ -49,6 +49,11 @@ class UploadPage extends React.Component {
             .then(data => {
                 console.log(data)
                 this.setState({ 
+                    customer_name: data['name'],
+                    customer_street: data['streetnumber'],
+                    customer_city: data['city'],
+                    customer_state: data['state'],
+                    customer_zip: data['zip'],
                     data: data,
                     counter :0
                 })
@@ -59,41 +64,35 @@ class UploadPage extends React.Component {
             if (currCount >= this.state.data.length)
                 return
             this.setState({ 
-                recipient: this.state.data[currCount]['name'],
-                streetNumber: this.state.data[currCount]['streetnumber'],
-                streetName: this.state.data[currCount]['address'],
-                city: this.state.data[currCount]['city'],
-                state: this.state.data[currCount]['state'],
-                zipcode: this.state.data[currCount]['zip']
+                customer_name: this.state.data[currCount]['name'],
+                customer_street: this.state.data[currCount]['streetnumber'],
+                customer_city: this.state.data[currCount]['city'],
+                customer_state: this.state.data[currCount]['state'],
+                customer_zip: this.state.data[currCount]['zip'],
             })
             this.setState(prevState => ({counter : prevState.counter + 1}))
             
         }
         else if (event.target.name === "confirmButton") {
             // TODO:: send the correct address to back-end to insert into database
+            add(this.state.customer_name, this.state.customer_street, this.state.customer_city, this.state.customer_state, this.state.customer_zip);
         }
     }
 
     handleChange(event) {
-        if (event.target.name === 'streetName') {
-            this.setState({streetName : event.target.value})
-        }
-        else if (event.target.name === 'streetNumber') {
-            this.setState({streetNumber : event.target.value})
-        }
-        else if (event.target.name === 'city') {
-            this.setState({city : event.target.value})
-        }
-        else if (event.target.name === 'state') {
-            this.setState({state : event.target.value})
-        }
-        else if (event.target.name === 'zipcode') {
-            this.setState({zipcode : event.target.value})
-        }
-        else if (event.target.name === 'selectFile') {
+        
+        if (event.target.name === 'selectFile') {
             this.setState({uploadFile : event.target.files[0]})
             this.setState({getimage : URL.createObjectURL(event.target.files[0])})
             // TODO:: Display image better and add a component so the user can say if they good
+        }
+        else {
+            const target = event.target;
+            const value = target.value;
+            const name = target.name;
+            this.setState({
+                [name]: value
+            });
         }
  
  
@@ -108,7 +107,7 @@ class UploadPage extends React.Component {
                     <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
                 </div>
                 <input name= "selectFile" type="file" className="hide" id="doupload" onChange={this.handleChange}/>
-                <label for="doupload"><img src={upbox} alt={"upload icon"} height="157" width="259"/></label>
+                <label for="doupload"><img src={upbox} alt={"upload icon"} className="upstyle" height="157" width="259" /></label>
                 
                 <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
@@ -120,10 +119,9 @@ class UploadPage extends React.Component {
                     <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
                     <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
                     <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
+                    <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
                 </form>
-                <div>
-                    <img src={this.state.display} alt="display of imge upload"/>
-                </div>
+                
             </div>
         )
     }
