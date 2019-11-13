@@ -13,7 +13,7 @@ CREATE TABLE Customers
 	customer_street_2 CHAR(32),
 	customer_city CHAR(32) NOT NULL,
 	customer_state CHAR(32) NOT NULL,
-	customer_zip INTEGER NOT NULL,
+	customer_zip CHAR(32) NOT NULL,
 	PRIMARY KEY (customer_id)
 );
 
@@ -26,3 +26,30 @@ CREATE TABLE Letters
 	PRIMARY KEY (letter_id),
 	FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
+
+
+----------------------------
+-- INSERT DATA STATEMENTS --
+----------------------------
+
+COPY Customers (
+	customer_id,
+	customer_name,
+	customer_street_1,
+	customer_street_2,
+	customer_city,
+	customer_state,
+	customer_zip
+)
+FROM 'Customers.csv'
+WITH DELIMITER ',';
+
+
+COPY Letters (
+	letter_id,
+	customer_id,
+	letter_image_path,
+	letter_date
+)
+FROM 'Letters.csv'
+WITH DELIMITER ',';

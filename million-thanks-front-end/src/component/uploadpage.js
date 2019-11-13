@@ -3,17 +3,17 @@ import '../index.css'
 import logo from './images/assets/banner_logo.png'
 import upbox from './images/assets/page_upload_button_drag_and_drop.png'
 import axios from 'axios'
+import {add} from './db_connect'
 
 class UploadPage extends React.Component {
     constructor() {
         super()
         this.state = {
-            recipient : "",
-            streetNumber : "",
-            streetName : "",
-            city : "",
-            state : "",
-            zipcode : "",
+            customer_name : "",
+            customer_street : "",
+            customer_city : "",
+            customer_state : "",
+            customer_zip : "",
             uploadFile: null,
             getimage: null,
             display: null,
@@ -57,45 +57,26 @@ class UploadPage extends React.Component {
                 console.log(data)
                 // console.log(count)
                 this.setState({ 
-                    // recipient: data[0]['name'],
-                    // streetNumber: data[0]['streetnumber'],
-                    // streetName: data[0]['address'],
-                    // city: data[0]['city'],
-                    // state: data[0]['state'],
-                    // zipcode: data[0]['zip']
+                    customer_name: data['customer_name'],
+                    customer_street: data['customer_street'],
+                    customer_city: data['customer_city'],
+                    customer_state: data['customer_state'],
+                    customer_zip: data['customer_zip'],
                     data: data,
                     counter :0
                 })
             })
         }
         else if (event.target.name === 'nextPerson') {
-            // get address
-            // this.setState({count: this.state.count + 1})
-            // fetch('http://localhost:3200/')
-            // .then(response => response.json())
-            // .then(data => {
-            //     console.log(data)
-            //     // console.log(count)
-            //     this.setState({ 
-            //         // recipient: data[0]['name'],
-            //         // streetNumber: data[0]['streetnumber'],
-            //         // streetName: data[0]['address'],
-            //         // city: data[0]['city'],
-            //         // state: data[0]['state'],
-            //         // zipcode: data[0]['zip']
-            //         data: data[0]
-            //     })
-            // })
             let currCount = this.state.counter
             if (currCount >= this.state.data.length)
                 return
             this.setState({ 
-                recipient: this.state.data[currCount]['name'],
-                streetNumber: this.state.data[currCount]['streetnumber'],
-                streetName: this.state.data[currCount]['address'],
-                city: this.state.data[currCount]['city'],
-                state: this.state.data[currCount]['state'],
-                zipcode: this.state.data[currCount]['zip']
+                customer_name: this.state.data[currCount]['customer_name'],
+                customer_street: this.state.data[currCount]['customer_street'],
+                customer_city: this.state.data[currCount]['customer_city'],
+                customer_state: this.state.data[currCount]['customer_state'],
+                customer_zip: this.state.data[currCount]['customer_zip'],
             })
             // currCount += 1
             this.setState(prevState => ({counter : prevState.counter + 1}))
@@ -103,29 +84,24 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === "confirmButton") {
             // TODO:: send the correct address to back-end to insert into database
+            add(this.state.customer_name, this.state.customer_street, this.state.customer_city, this.state.customer_state, this.state.customer_zip);
         }
     }
 
     handleChange(event) {
-        if (event.target.name === 'streetName') {
-            this.setState({streetName : event.target.value})
-        }
-        else if (event.target.name === 'streetNumber') {
-            this.setState({streetNumber : event.target.value})
-        }
-        else if (event.target.name === 'city') {
-            this.setState({city : event.target.value})
-        }
-        else if (event.target.name === 'state') {
-            this.setState({state : event.target.value})
-        }
-        else if (event.target.name === 'zipcode') {
-            this.setState({zipcode : event.target.value})
-        }
-        else if (event.target.name === 'selectFile') {
+        
+        if (event.target.name === 'selectFile') {
             this.setState({uploadFile : event.target.files[0]})
             this.setState({getimage : URL.createObjectURL(event.target.files[0])})
             // TODO:: Display image better and add a component so the user can say if they good
+        }
+        else {
+            const target = event.target;
+            const value = target.value;
+            const name = target.name;
+            this.setState({
+                [name]: value
+            });
         }
  
  

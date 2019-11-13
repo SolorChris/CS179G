@@ -1,6 +1,6 @@
 #! /bin/bash
 echo "creating db named CPC_DB"
-folder=/tmp/CPC_DB
+folder=/tmp/CPC
 export PGDATA=$folder/data
 export PGSOCKETS=$folder/sockets
 export PGPORT=9001
@@ -10,9 +10,9 @@ export PGPORT=9001
 
 
 
-#echo "Copying csv files ... "
-#sleep 1
-#cp ../data/*.csv /tmp/$USER/myDB/data/.
+echo "Copying csv files ... "
+sleep 1
+cp ../data/*.csv /tmp/CPC/data/.
 
 echo "Initializing tables .. "
 sleep 1
