@@ -140,7 +140,7 @@ class UploadPage extends React.Component {
                     <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
                 </div>
                 <input name= "selectFile" type="file" className="hide" id="doupload" onChange={this.handleChange}/>
-                <label for="doupload"><img src={upbox} alt={"upload icon"} height="157" width="259"/></label>
+                <label for="doupload"><img src={upbox} alt={"upload icon"} className="upstyle" height="157" width="259" /></label>
                 
                 <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
@@ -153,10 +153,9 @@ class UploadPage extends React.Component {
                     <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
                     {/* <input type="text" name="data" className="textField" placeholder="data" value={this.state.data} onChange={this.handleChange}></input> */}
                     <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
+                    <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
                 </form>
-                <div>
-                    <img src={this.state.display} alt="display of imge upload"/>
-                </div>
+                
             </div>
         )
     }
