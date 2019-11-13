@@ -48,8 +48,11 @@ body {
     border-radius: 10px;  
     border-color: #3EACD5;
     border-style: solid;
-   
 }
+.normalButton1:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 .normalButton2 {
     background-color: #3EACD5;
     color: white;
@@ -60,6 +63,10 @@ body {
     border-color: #3EACD5;
     border-style: solid;
 }
+.normalButton2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 .normalButton3 {
     background-color: #3EACD5;
     color: white;
@@ -70,8 +77,7 @@ body {
     border-color: #3EACD5;
     border-style: solid;
 }
-
-.normalButton:hover {
+.normalButton3:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 

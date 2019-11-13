@@ -16,12 +16,18 @@ class UploadPage extends React.Component {
             customer_zip : "",
             uploadFile: null,
             getimage: null,
-            display: null
+            display: null,
+            count: 0,
+            data: null
         }
 
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
+
+    // increment() {
+    //     this.setState({this.state.count: this.state.count + 1})
+    // }
 
     handleClick(event) {
         if (event.target.name === 'searchButton') {
@@ -44,19 +50,65 @@ class UploadPage extends React.Component {
             // give signal to run python script
             fetch('http:/localhost:3200/readytorun?run=yes')
             // get address
+            // this.setState({count: this.state.count + 1})
             fetch('http://localhost:3200/')
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                // console.log(count)
                 this.setState({ 
+<<<<<<< HEAD
                     customer_name: data['name'],
                     customer_street: data['streetnumber'],
                     customer_street: data['address'],
                     customer_city: data['city'],
                     customer_state: data['state'],
                     customer_zip: data['zip']
+=======
+                    // recipient: data[0]['name'],
+                    // streetNumber: data[0]['streetnumber'],
+                    // streetName: data[0]['address'],
+                    // city: data[0]['city'],
+                    // state: data[0]['state'],
+                    // zipcode: data[0]['zip']
+                    data: data,
+                    counter :0
+>>>>>>> 73169485b72f2c95ceda0e2f499d71fb63df8d02
                 })
             })
+        }
+        else if (event.target.name === 'nextPerson') {
+            // get address
+            // this.setState({count: this.state.count + 1})
+            // fetch('http://localhost:3200/')
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(data)
+            //     // console.log(count)
+            //     this.setState({ 
+            //         // recipient: data[0]['name'],
+            //         // streetNumber: data[0]['streetnumber'],
+            //         // streetName: data[0]['address'],
+            //         // city: data[0]['city'],
+            //         // state: data[0]['state'],
+            //         // zipcode: data[0]['zip']
+            //         data: data[0]
+            //     })
+            // })
+            let currCount = this.state.counter
+            if (currCount >= this.state.data.length)
+                return
+            this.setState({ 
+                recipient: this.state.data[currCount]['name'],
+                streetNumber: this.state.data[currCount]['streetnumber'],
+                streetName: this.state.data[currCount]['address'],
+                city: this.state.data[currCount]['city'],
+                state: this.state.data[currCount]['state'],
+                zipcode: this.state.data[currCount]['zip']
+            })
+            // currCount += 1
+            this.setState(prevState => ({counter : prevState.counter + 1}))
+            
         }
         else if (event.target.name === "confirmButton") {
             // TODO:: send the correct address to back-end to insert into database
@@ -97,11 +149,22 @@ class UploadPage extends React.Component {
                 <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
                 <form>
+<<<<<<< HEAD
                     <input type="text" name="customer_name" className="textField" placeholder="recipient" value={this.state.customer_name} onChange={this.handleChange}></input>
                     <input type="text" name="customer_street" className="textField" placeholder="street number" value={this.state.customer_street} onChange={this.handleChange}></input>
                     <input type="text" name="customer_city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
                     <input type="text" name="customer_state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
                     <input type="text" name="customer_zip" className="textField" placeholder="zipcode" value={this.state.customer_zip} onChange={this.handleChange}></input>
+=======
+                    <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.recipient} onChange={this.handleChange}></input>
+                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
+                    <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input>
+                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
+                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
+                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
+                    {/* <input type="text" name="data" className="textField" placeholder="data" value={this.state.data} onChange={this.handleChange}></input> */}
+                    <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
+>>>>>>> 73169485b72f2c95ceda0e2f499d71fb63df8d02
                 </form>
                 <div>
                     <img src={this.state.display} alt="display of image upload"/>
