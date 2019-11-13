@@ -3,17 +3,17 @@ import '../index.css'
 import logo from './images/assets/banner_logo.png'
 import upbox from './images/assets/page_upload_button_drag_and_drop.png'
 import axios from 'axios'
+import {add} from './db_connect'
 
 class UploadPage extends React.Component {
     constructor() {
         super()
         this.state = {
-            recipient : "",
-            streetNumber : "",
-            streetName : "",
-            city : "",
-            state : "",
-            zipcode : "",
+            customer_name : "",
+            customer_street : "",
+            customer_city : "",
+            customer_state : "",
+            customer_zip : "",
             uploadFile: null,
             getimage: null,
             display: null
@@ -49,40 +49,35 @@ class UploadPage extends React.Component {
             .then(data => {
                 console.log(data)
                 this.setState({ 
-                    recipient: data['name'],
-                    streetNumber: data['streetnumber'],
-                    streetName: data['address'],
-                    city: data['city'],
-                    state: data['state'],
-                    zipcode: data['zip']
+                    customer_name: data['name'],
+                    customer_street: data['streetnumber'],
+                    customer_street: data['address'],
+                    customer_city: data['city'],
+                    customer_state: data['state'],
+                    customer_zip: data['zip']
                 })
             })
         }
         else if (event.target.name === "confirmButton") {
             // TODO:: send the correct address to back-end to insert into database
+            add(customer_name, customer_street, customer_city, customer_state, customer_zip);
         }
     }
 
     handleChange(event) {
-        if (event.target.name === 'streetName') {
-            this.setState({streetName : event.target.value})
-        }
-        else if (event.target.name === 'streetNumber') {
-            this.setState({streetNumber : event.target.value})
-        }
-        else if (event.target.name === 'city') {
-            this.setState({city : event.target.value})
-        }
-        else if (event.target.name === 'state') {
-            this.setState({state : event.target.value})
-        }
-        else if (event.target.name === 'zipcode') {
-            this.setState({zipcode : event.target.value})
-        }
-        else if (event.target.name === 'selectFile') {
+        
+        if (event.target.name === 'selectFile') {
             this.setState({uploadFile : event.target.files[0]})
             this.setState({getimage : URL.createObjectURL(event.target.files[0])})
             // TODO:: Display image better and add a component so the user can say if they good
+        }
+        else {
+            const target = event.target;
+            const value = target.value;
+            const name = target.name;
+            this.setState({
+                [name]: value
+            });
         }
  
  
@@ -102,15 +97,14 @@ class UploadPage extends React.Component {
                 <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
                 <form>
-                    <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.recipient} onChange={this.handleChange}></input>
-                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
-                    <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input>
-                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
-                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
-                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_name" className="textField" placeholder="recipient" value={this.state.customer_name} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_street" className="textField" placeholder="street number" value={this.state.customer_street} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_zip" className="textField" placeholder="zipcode" value={this.state.customer_zip} onChange={this.handleChange}></input>
                 </form>
                 <div>
-                    <img src={this.state.display} alt="display of imge upload"/>
+                    <img src={this.state.display} alt="display of image upload"/>
                 </div>
             </div>
         )
