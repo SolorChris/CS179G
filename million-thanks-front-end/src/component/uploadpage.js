@@ -69,7 +69,7 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === 'nextPerson') {
             let currCount = this.state.counter
-            if (currCount >= this.state.data.length)
+            if (currCount >= this.state.data.length) 
                 return
             this.setState({ 
                 customer_name: this.state.data[currCount]['customer_name'],
@@ -121,12 +121,11 @@ class UploadPage extends React.Component {
                 <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
                 <form>
-                    <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.recipient} onChange={this.handleChange}></input>
-                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
-                    <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input>
-                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
-                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
-                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
+                    <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.customer_name} onChange={this.handleChange}></input>
+                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.customer_street} onChange={this.handleChange}></input>
+                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
+                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
+                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.customer_zip} onChange={this.handleChange}></input>
                     {/* <input type="text" name="data" className="textField" placeholder="data" value={this.state.data} onChange={this.handleChange}></input> */}
                     <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
                     <img src={this.state.display} height="920" width="920" alt="display of image upload"/>

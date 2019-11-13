@@ -6,7 +6,8 @@ import requests
 from flask import Flask
 from flask import jsonify
 from flask_cors import CORS
-from flask import requests
+# from flask import requests
+import flask
 app = Flask(__name__)
 CORS(app)
 
@@ -57,11 +58,11 @@ def detect_document(path):
     
     return returnstring
 
-#extract any .zip files in the uploadimage directory
-# for filename in os.listdir("uploadimage"):
-#     if filename.lower().endswith(".zip"):
-#         with zipfile.ZipFile("uploadimage\\"+filename, 'r') as zip_ref:
-#             zip_ref.extractall("uploadimage")
+# extract any .zip files in the uploadimage directory
+for filename in os.listdir("uploadimage"):
+    if filename.lower().endswith(".zip"):
+        with zipfile.ZipFile("uploadimage\\"+filename, 'r') as zip_ref:
+            zip_ref.extractall("uploadimage")
 
 #perform ocr on any jpg in uploadimage
 # imgcount = 1
@@ -98,15 +99,21 @@ for filename in os.listdir("uploadimage"):
         state = parsedaddress[0]['StateName']
         # print(parsedaddress[0]['ZipCode'])
         zip = parsedaddress[0]['ZipCode']
+        customer_street = streetnumber + " " + address
 
         
         data = {}
-        data['streetnumber'] = streetnumber
-        data['name'] = name
-        data['address'] = address
-        data['city'] = city
-        data['state'] = state
-        data['zip'] = zip
+        # data['streetnumber'] = streetnumber
+        # data['name'] = name
+        # data['address'] = address
+        # data['city'] = city
+        # data['state'] = state
+        # data['zip'] = zip
+        data['customer_name'] = name
+        data['customer_street'] = customer_street
+        data['customer_city'] = city
+        data['customer_state'] = state
+        data['customer_zip'] = zip
 
         jsonarray.append(data)
 
