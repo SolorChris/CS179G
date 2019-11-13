@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../index.css'
 import logo from './logo.png' 
 import { makeStyles } from '@material-ui/core/styles'
@@ -17,10 +17,19 @@ class SearchPage extends React.Component {
         this.state = {
             selectedValue: "fullAddress",
             displayTable: false,
-            address: null
+            address: null,
+            selectedAddress : []
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleSelect = this.handleSelect.bind(this)
+    }
+
+    handleSelect(event, row) {
+        this.setState( prevState => ({selectedAddress : [...prevState.selectedAddress, row]}))
+        console.log(this.state.selectedAddress)
+        console.log(row)
+        console.log("hello world")
     }
 
     handleClick(event) {
@@ -49,6 +58,9 @@ class SearchPage extends React.Component {
             }
             this.setState({displayTable : true})
             search(this.state.selectedValue, this.state.address)
+        }
+        else if (event.target.name === "submitAddress") {
+            console.log(selectedAddress)
         }
     }
 
@@ -109,7 +121,9 @@ class SearchPage extends React.Component {
                         <TableCell align="right">{row.state}</TableCell>
                         <TableCell align="right">{row.zipcode}</TableCell>
                         <TableCell align="right">
-                            <Checkbox/>
+                            <Checkbox
+                                onChange={e => this.handleSelect(e, row)}
+                            />
                         </TableCell>
                     </TableRow>
                     ))}

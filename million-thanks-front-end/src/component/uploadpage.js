@@ -25,10 +25,6 @@ class UploadPage extends React.Component {
         this.handleChange = this.handleChange.bind(this)
     }
 
-    // increment() {
-    //     this.setState({this.state.count: this.state.count + 1})
-    // }
-
     handleClick(event) {
         if (event.target.name === 'searchButton') {
             this.props.history.push('/search')
@@ -47,45 +43,18 @@ class UploadPage extends React.Component {
                 this.setState({uploadFile : null})
                 this.setState({display : this.state.getimage})
             })
-            // give signal to run python script
             fetch('http:/localhost:3200/readytorun?run=yes')
-            // get address
-            // this.setState({count: this.state.count + 1})
             fetch('http://localhost:3200/')
             .then(response => response.json())
             .then(data => {
                 console.log(data)
-                // console.log(count)
                 this.setState({ 
-                    // recipient: data[0]['name'],
-                    // streetNumber: data[0]['streetnumber'],
-                    // streetName: data[0]['address'],
-                    // city: data[0]['city'],
-                    // state: data[0]['state'],
-                    // zipcode: data[0]['zip']
                     data: data,
                     counter :0
                 })
             })
         }
         else if (event.target.name === 'nextPerson') {
-            // get address
-            // this.setState({count: this.state.count + 1})
-            // fetch('http://localhost:3200/')
-            // .then(response => response.json())
-            // .then(data => {
-            //     console.log(data)
-            //     // console.log(count)
-            //     this.setState({ 
-            //         // recipient: data[0]['name'],
-            //         // streetNumber: data[0]['streetnumber'],
-            //         // streetName: data[0]['address'],
-            //         // city: data[0]['city'],
-            //         // state: data[0]['state'],
-            //         // zipcode: data[0]['zip']
-            //         data: data[0]
-            //     })
-            // })
             let currCount = this.state.counter
             if (currCount >= this.state.data.length)
                 return
@@ -97,7 +66,6 @@ class UploadPage extends React.Component {
                 state: this.state.data[currCount]['state'],
                 zipcode: this.state.data[currCount]['zip']
             })
-            // currCount += 1
             this.setState(prevState => ({counter : prevState.counter + 1}))
             
         }
@@ -151,7 +119,6 @@ class UploadPage extends React.Component {
                     <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
                     <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
                     <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
-                    {/* <input type="text" name="data" className="textField" placeholder="data" value={this.state.data} onChange={this.handleChange}></input> */}
                     <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
                 </form>
                 <div>
