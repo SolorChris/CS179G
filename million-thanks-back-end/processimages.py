@@ -6,12 +6,8 @@ import requests
 from flask import Flask
 from flask import jsonify
 from flask_cors import CORS
-<<<<<<< HEAD
 # from flask import requests
 import flask
-=======
-#from flask import requests
->>>>>>> 5bd87de8d39562f519d615fa589667606851fdc7
 app = Flask(__name__)
 CORS(app)
 
@@ -126,7 +122,7 @@ print(json_data)
 @app.route('/')
 def processjson():
     return json_data
-app.run(host='localhost', port=3200)
+app.run(host='localhost', port=3300)
 
 # @app.route('/test', methods = ['POST'])
 # def index():
