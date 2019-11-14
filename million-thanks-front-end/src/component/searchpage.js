@@ -51,7 +51,7 @@ class SearchPage extends React.Component {
             }
         }
         else if (event.target.name === "submitAddress") {
-            console.log(selectedAddress)
+            console.log(this.state.selectedAddress)
         }
     }
 
