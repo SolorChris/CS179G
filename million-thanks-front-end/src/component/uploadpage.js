@@ -61,7 +61,7 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === 'nextPerson') {
             let currCount = this.state.counter
-            if (currCount >= this.state.data.length) 
+            if (this.state.data === null || currCount >= this.state.data.length) 
                 return
             this.setState({ 
                 customer_name: this.state.data[currCount]['name'],
@@ -109,8 +109,10 @@ class UploadPage extends React.Component {
                 <input name= "selectFile" type="file" className="hide" id="doupload" onChange={this.handleChange}/>
                 <label for="doupload"><img src={upbox} alt={"upload icon"} className="upstyle" height="157" width="259" /></label>
                 
-                <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
-                <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
+                <button name= "uploadFile" className="uploadbutton" type="button" onClick={this.handleClick}>upload selected file</button>
+                <button name= "confirmButton" className="confirmbutton" type="button" onClick={this.handleClick} >confirm address</button>
+                <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button>
+                <div className="dataget">
                 <form>
                     <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.recipient} onChange={this.handleChange}></input>
                     <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
@@ -118,10 +120,9 @@ class UploadPage extends React.Component {
                     <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
                     <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
                     <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
-                    <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
-                    <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
+                    <img src={this.state.display} className="imagepos" height="460" width="460" alt=""/>
                 </form>
-                
+                </div>
             </div>
         )
     }

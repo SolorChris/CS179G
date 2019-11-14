@@ -13,6 +13,7 @@ class SearchPage extends React.Component {
             filter: "name",
             displayTable: false,
             addresses: null,
+            selectedAddress: null,
             searchText: ""
         }
         this.handleClick = this.handleClick.bind(this)
@@ -48,7 +49,7 @@ class SearchPage extends React.Component {
             //this.setState({displayTable : true})
         }
         else if (event.target.name === "submitAddress") {
-            console.log(selectedAddress)
+            console.log(this.state.selectedAddress)
         }
     }
 
