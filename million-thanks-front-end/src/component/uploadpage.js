@@ -120,7 +120,7 @@ class UploadPage extends React.Component {
                     <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
                     <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
                     <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
-                    <img src={this.state.display} className="imagepos" height="460" width="460" alt=""/>
+                    <img src={this.state.display} className= "imagepos" height="465" width="465" alt=" "/>
                 </form>
                 </div>
             </div>
