@@ -111,7 +111,7 @@ class UploadPage extends React.Component {
                 
                 <button name= "uploadFile" className="uploadbutton" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="confirmbutton" type="button" onClick={this.handleClick} >confirm address</button>
-                <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button>
+                {/* <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button> */}
                 <div className="dataget">
                 <form>
                     <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.customer_name} onChange={this.handleChange}></input>
