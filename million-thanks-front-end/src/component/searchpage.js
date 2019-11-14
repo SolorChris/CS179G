@@ -3,8 +3,9 @@ import '../index.css'
 import logo from './logo.png' 
 import {makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper }from '@material-ui/core'
 import { Checkbox, Tab } from '@material-ui/core'
-import {addCustomer, search} from './db_connect'
+//import {addCustomer, search} from './db_connect'
 import { unwatchFile } from 'fs'
+import { inspect } from 'util'
 
 class SearchPage extends React.Component {
     constructor() {
@@ -32,12 +33,14 @@ class SearchPage extends React.Component {
             //     this.setState({address:addr})
             // }
             this.setState({displayTable : false})
-            const data = search(this.state.filter, this.state.searchText)
-            ///Promise.resolve(data);
-              
-            this.setState({addresses:data})
-            console.log("LOG: " + data)
-            //this.setState({displayTable : true})
+            if(this.state.searchText) {
+                return fetch("http://localhost:3200/search?text=" + this.state.searchText + "&filter=" + this.state.filter)
+                .then(response => response.json())
+                .then(data => {
+                    this.setState({ addresses: data,
+                                    displayTable: true})
+                })
+            }
         }
     }
 
@@ -81,9 +84,7 @@ class SearchPage extends React.Component {
                 <TableBody>
                     {this.state.addresses.map(row => (
                     <TableRow key={row.customer_name}>
-                        <TableCell component="th" scope="row">
-                        {row.customer_name}
-                        </TableCell>
+                        <TableCell component="th" scope="row">{row.customer_name}</TableCell>
                         <TableCell align="right">{row.customer_street_1}</TableCell>
                         <TableCell align="right">{row.customer_city}</TableCell>
                         <TableCell align="right">{row.customer_state}</TableCell>
