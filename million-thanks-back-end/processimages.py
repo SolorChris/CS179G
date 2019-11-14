@@ -122,7 +122,7 @@ print(json_data)
 @app.route('/')
 def processjson():
     return json_data
-app.run(host='localhost', port=3200)
+app.run(host='localhost', port=3300)
 
 # @app.route('/test', methods = ['POST'])
 # def index():

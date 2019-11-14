@@ -43,17 +43,17 @@ class UploadPage extends React.Component {
                 this.setState({uploadFile : null})
                 this.setState({display : this.state.getimage})
             })
-            fetch('http:/localhost:3200/readytorun?run=yes')
-            fetch('http://localhost:3200/')
+            fetch('http:/localhost:3300/readytorun?run=yes')
+            fetch('http://localhost:3300/')
             .then(response => response.json())
             .then(data => {
                 console.log(data)
                 this.setState({ 
-                    customer_name: data['name'],
-                    customer_street: data['streetnumber'],
-                    customer_city: data['city'],
-                    customer_state: data['state'],
-                    customer_zip: data['zip'],
+                    customer_name: data['customer_name'],
+                    customer_street: data['customer_street'],
+                    customer_city: data['customer_city'],
+                    customer_state: data['customer_state'],
+                    customer_zip: data['customer_zip'],
                     data: data,
                     counter :0
                 })
@@ -61,14 +61,14 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === 'nextPerson') {
             let currCount = this.state.counter
-            if (currCount >= this.state.data.length) 
+            if (this.state.data === null || currCount >= this.state.data.length) 
                 return
             this.setState({ 
-                customer_name: this.state.data[currCount]['name'],
-                customer_street: this.state.data[currCount]['streetnumber'],
-                customer_city: this.state.data[currCount]['city'],
-                customer_state: this.state.data[currCount]['state'],
-                customer_zip: this.state.data[currCount]['zip'],
+                customer_name: this.state.data[currCount]['customer_name'],
+                customer_street: this.state.data[currCount]['customer_street'],
+                customer_city: this.state.data[currCount]['customer_city'],
+                customer_state: this.state.data[currCount]['customer_state'],
+                customer_zip: this.state.data[currCount]['customer_zip'],
             })
             this.setState(prevState => ({counter : prevState.counter + 1}))
             
@@ -109,19 +109,21 @@ class UploadPage extends React.Component {
                 <input name= "selectFile" type="file" className="hide" id="doupload" onChange={this.handleChange}/>
                 <label for="doupload"><img src={upbox} alt={"upload icon"} className="upstyle" height="157" width="259" /></label>
                 
-                <button name= "uploadFile" className="normalButton1" type="button" onClick={this.handleClick}>upload selected file</button>
-                <button name= "confirmButton" className="normalButton2" type="button" onClick={this.handleClick} >confirm address</button>
+                <button name= "uploadFile" className="uploadbutton" type="button" onClick={this.handleClick}>upload selected file</button>
+                <button name= "confirmButton" className="confirmbutton" type="button" onClick={this.handleClick} >confirm address</button>
+                <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button>
+                <div className="dataget">
                 <form>
-                    <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.recipient} onChange={this.handleChange}></input>
-                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
-                    <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input>
-                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
-                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
-                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
+                    <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.customer_name} onChange={this.handleChange}></input>
+                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.customer_street} onChange={this.handleChange}></input>
+                    {/* <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input> */}
+                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
+                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
+                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.customer_zip} onChange={this.handleChange}></input>
                     <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
                     <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
                 </form>
-                
+                </div>
             </div>
         )
     }

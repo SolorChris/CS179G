@@ -34,6 +34,13 @@ body {
     border-style: solid;
 }
 
+.imagepos {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
 
 .notClickButton:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
@@ -62,7 +69,7 @@ label {
     top: 2px;
 }
 
-.normalButton1 {
+.uploadbutton {
     background-color: #3EACD5;
     color: white;
     padding: 5px 5px;
@@ -72,11 +79,12 @@ label {
     border-color: #3EACD5;
     border-style: solid;
     position: relative;
-    left: 0px;
+    top: 28px;
+    left: -259px;
 
    
 }
-.normalButton2 {
+.confirmbutton {
     background-color: #3EACD5;
     color: white;
     padding: 5px 5px;
@@ -85,6 +93,9 @@ label {
     border-radius: 10px;  
     border-color: #3EACD5;
     border-style: solid;
+    position: relative;
+    top:-135px;
+    left:870px;
 }
 .normalButton3 {
     background-color: #3EACD5;
@@ -95,6 +106,30 @@ label {
     border-radius: 10px;  
     border-color: #3EACD5;
     border-style: solid;
+}
+.personbutton {
+    background-color: #3EACD5;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    font-size: 16px;  
+    border-radius: 10px;  
+    border-color: #3EACD5;
+    border-style: solid;
+    position: relative;
+    top:-135px;
+    left: -210px;
+
+}
+
+.dataget {
+height: 544px;
+width: 1080px;
+border-style:solid;
+border-radius: 10px;
+position: relative;
+left: 330px;
+top:-125px;
 }
 
 .normalButton:hover {
@@ -107,6 +142,9 @@ label {
     font-size: 12px;
     border-radius: 30px;
     border: solid;
+    position: relative;
+    top: 5px;
+    left: 5px;
 }
 
 .textField2 {
