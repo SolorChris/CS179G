@@ -29,6 +29,9 @@ class UploadPage extends React.Component {
         if (event.target.name === 'searchButton') {
             this.props.history.push('/search')
         }  
+        else if (event.target.name === 'mapButton') {
+            this.props.history.push('/analyticmap')
+        }
         else if (event.target.name === 'uploadFile') {
             console.log(this.state.uploadFile)
             const image = new FormData()
@@ -105,6 +108,7 @@ class UploadPage extends React.Component {
                     <img src={logo} alt={"million thanks"} height="70" width="150"/>
                     <button name= "uploadButton" type="button" className="clickButton" onClick={this.handleClick}>upload</button>
                     <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
+                    <button name= "mapButton" type="button" className="notClickButton" onClick={this.handleClick}>analytic map</button>
                 </div>
                 <input name= "selectFile" type="file" className="hide" id="doupload" onChange={this.handleChange}/>
                 <label for="doupload"><img src={upbox} alt={"upload icon"} className="upstyle" height="157" width="259" /></label>

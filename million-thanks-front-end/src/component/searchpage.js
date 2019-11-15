@@ -32,7 +32,11 @@ class SearchPage extends React.Component {
 
     handleClick(event) {
         if (event.target.name === "uploadButton") {
-            this.props.history.goBack()
+            this.props.history.push('/')
+        }
+        else if (event.target.name === "mapButton") {
+            //this.props.history.goBack()
+            this.props.history.push('/analyticmap')
         }
         else if (event.target.name === "submitButton") {
             // TODO:: write query and send it to backend to run it on database
@@ -129,6 +133,7 @@ class SearchPage extends React.Component {
                     <img src={logo} alt={"million thanks"} height="70" width="150"/>
                     <button name= "uploadButton" type="button" className="notClickButton" onClick={this.handleClick}>upload</button>
                     <button name= "searchButton" type="button" className="clickButton" onClick={this.handleClick}>search</button>
+                    <button name= "mapButton" type="button" className="notClickButton" onClick={this.handleClick}>analytic map</button>
                 </div>
                 <input type="text" name="searchText" className="textField2" placeholder="enter address" onChange={this.handleChange} value={this.state.searchText}></input>
                 <select name="filter" onChange={this.handleChange} >
