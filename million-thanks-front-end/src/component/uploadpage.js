@@ -111,17 +111,16 @@ class UploadPage extends React.Component {
                 
                 <button name= "uploadFile" className="uploadbutton" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="confirmbutton" type="button" onClick={this.handleClick} >confirm address</button>
-                <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button>
+                {/* <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button> */}
                 <div className="dataget">
                 <form>
                     <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.customer_name} onChange={this.handleChange}></input>
                     <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.customer_street} onChange={this.handleChange}></input>
-                    {/* <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input> */}
+                   {/* <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input> */}
                     <input type="text" name="city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
                     <input type="text" name="state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
                     <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.customer_zip} onChange={this.handleChange}></input>
-                    <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
-                    <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
+                    <img src={this.state.display} className= "imagepos" height="465" width="465" alt=" "/>
                 </form>
                 </div>
             </div>
