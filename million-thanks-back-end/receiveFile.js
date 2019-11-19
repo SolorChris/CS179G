@@ -25,6 +25,8 @@ app.post('/upload',function(req, res) {
             return res.status(500).json(err)
         }
         sendToPython = true
+
+        
         return res.status(200).send(req.file)
     })
 })

@@ -25,3 +25,5 @@ also pip install --upgrade google-cloud-vision
 go wild.
 
 go to million-thanks-back-end directory and type 'node receiveFile.js' to run code that receive upload file from front-end
+
+thomas: receivefile.js line28 after sendtopython=true

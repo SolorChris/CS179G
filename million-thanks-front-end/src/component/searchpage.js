@@ -23,24 +23,32 @@ class SearchPage extends React.Component {
     }
 
     handleSelect(event, row) {
+        /*
         this.setState( prevState => ({selectedAddress : [...prevState.selectedAddress, row]}))
         console.log(this.state.selectedAddress)
         console.log(row)
-        console.log("hello world")
+        console.log("hello world")*/
     }
 
     handleClick(event) {
         if (event.target.name === "uploadButton") {
-            this.props.history.goBack()
+            this.props.history.push('/')
+        }
+        else if (event.target.name === "mapButton") {
+            //this.props.history.goBack()
+            this.props.history.push('/analyticmap')
         }
         else if (event.target.name === "submitButton") {
             // TODO:: write query and send it to backend to run it on database
-            // if (this.state.filter === "name") {
-            //     console.log(this.state.filter)
-            //     let addr = [{'sender':'me','street':'123 hello','city':'riverside','state':'CA','zipcode':'11111'},
-            //             {'sender':'me','street':'321 world','city':'anaheim','state':'CA','zipcode':'22222'}]
-            //     this.setState({address:addr})
-            // }
+            /*
+             if (this.state.filter === "name") {
+                 console.log("hello")
+                 let addr = [{'customer_name':'me','customer_street_1':'123 hello','customer_city':'riverside','customer_state':'CA','customer_zip':'11111'},
+                         {'customer_name':'me','customer_street_1':'321 world','cutumer_city':'anaheim','customer_state':'CA','customer_zip':'22222'}]
+                 this.setState({addresses:addr})
+                 this.setState({displayTable:true})
+            }
+            */
             this.setState({displayTable : false})
             if(this.state.searchText) {
                 return fetch("http://localhost:3200/search?text=" + this.state.searchText + "&filter=" + this.state.filter)
@@ -125,6 +133,7 @@ class SearchPage extends React.Component {
                     <img src={logo} alt={"million thanks"} height="70" width="150"/>
                     <button name= "uploadButton" type="button" className="notClickButton" onClick={this.handleClick}>upload</button>
                     <button name= "searchButton" type="button" className="clickButton" onClick={this.handleClick}>search</button>
+                    <button name= "mapButton" type="button" className="notClickButton" onClick={this.handleClick}>analytic map</button>
                 </div>
                 <input type="text" name="searchText" className="textField2" placeholder="enter address" onChange={this.handleChange} value={this.state.searchText}></input>
                 <select name="filter" onChange={this.handleChange} >
