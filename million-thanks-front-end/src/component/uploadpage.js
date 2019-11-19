@@ -111,7 +111,7 @@ class UploadPage extends React.Component {
                 
                 <button name= "uploadFile" className="uploadbutton" type="button" onClick={this.handleClick}>upload selected file</button>
                 <button name= "confirmButton" className="confirmbutton" type="button" onClick={this.handleClick} >confirm address</button>
-                {/* <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button> */}
+                <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button>
                 <div className="dataget">
                 <form>
                     <input type="text" name="customer_name" className="textField" placeholder="name" value={this.state.customer_name} onChange={this.handleChange}></input>
@@ -119,7 +119,6 @@ class UploadPage extends React.Component {
                     <input type="text" name="customer_city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
                     <input type="text" name="customer_state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
                     <input type="text" name="customer_zip" className="textField" placeholder="zip" value={this.state.customer_zip} onChange={this.handleChange}></input>
-                    <button name= "nextPerson" className="normalButton3" type="button" onClick={this.handleClick} >Next Person</button>
                     <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
                 </form>
                 </div>
