@@ -2,8 +2,8 @@
 folder=/tmp/CPC
 export PGDATA=$folder/data
 export PGSOCKETS=$folder/sockets
+export PGPORT=9001
 
-# path for linux installation
 PATH=/usr/lib/postgresql/11/bin:$PATH
 export PATH
 

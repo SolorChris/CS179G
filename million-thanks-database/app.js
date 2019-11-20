@@ -16,21 +16,44 @@ client.connect();
 
 app.get('/addcustomer', function(req, res){
   const {name, street, city, state, zip} = req.query
-   var nextID = client.query('SELECT MAX(customer_id) FROM customers;', (err, res) => {
+  client.query('SELECT MAX(customer_id) FROM Customers;', (err, res) => {
      if (err) throw err
-   });
-   console.log(nextID)
-  nextId = parseInt(nextID) + 1
-  console.log("Adding:", '3', name, street, city, state, zip);
+      var nextId = parseInt(res.rows[0].max) + 1
+      console.log(nextId)
+      console.log("Adding:", nextId, name, street, city, state, zip);
+
+      client.query('INSERT INTO Customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip) '
+                + 'VALUES (\'' + nextId + "\', \'" + name + "\', \'" + street + "\', \'" + "_" + "\', \'" + city + "\', \'"
+                + state + "\', \'" + zip + '\');', (err, res) => {
+      if (err) throw err
+      })
+   })
+  
   
   //client.query('INSERT INTO customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip) VALUES (1, \'Ian Bonafede\', \'11285 Florindo Rd.', '', 'San Diego', 'California', '92127');')
 
-  client.query('INSERT INTO Customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip) '
-                + 'VALUES (\'' + '3' + "\', \'" + name + "\', \'" + street + "\', \'" + "_" + "\', \'" + city + "\', \'"
+  
+});
+
+app.get('/removecustomer', function(req, res){
+  const {name, street, city, state, zip} = req.query
+  client.query('SELECT MAX(customer_id) FROM Customers;', (err, res) => {
+     if (err) throw err
+      var nextId = parseInt(res.rows[0].max) + 1
+      console.log(nextId)
+      console.log("Adding:", nextId, name, street, city, state, zip);
+
+      client.query('INSERT INTO Customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip) '
+                + 'VALUES (\'' + nextId + "\', \'" + name + "\', \'" + street + "\', \'" + "_" + "\', \'" + city + "\', \'"
                 + state + "\', \'" + zip + '\');', (err, res) => {
-    if (err) throw err
-  });
-  //console.log(res)
+      if (err) throw err
+      })
+   })
+  
+  
+  //client.query('INSERT INTO customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip) VALUES (1, \'Ian Bonafede\', \'11285 Florindo Rd.', '', 'San Diego', 'California', '92127');')
+
+  
 });
 
 app.get('/search', function(req, resp){
