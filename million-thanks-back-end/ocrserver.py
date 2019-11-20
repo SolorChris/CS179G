@@ -2,13 +2,16 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 import sys
+from flask_cors import CORS
 from processimages import runocr
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/", methods=['GET','POST'])
 def hello():
-    r=request.get_json()
-    data = runocr()
+    filename=request.args.get('filename')
+    data = runocr(filename)
+    print(filename, file=sys.stdout)
     print(data, file=sys.stdout)
     return data
 

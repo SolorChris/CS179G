@@ -34,6 +34,7 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === 'uploadFile') {
             console.log(this.state.uploadFile)
+            console.log("heelo")
             const image = new FormData()
             image.append('file', this.state.uploadFile)
             
@@ -46,7 +47,9 @@ class UploadPage extends React.Component {
                 this.setState({uploadFile : null})
                 this.setState({display : this.state.getimage})
             })
-            fetch('http:/localhost:3300/readytorun?run=yes')
+            fetch('http://localhost:8000/?filename=' + this.state.uploadFile['name'])
+
+            /* comment out for debug
             fetch('http://localhost:3300/')
             .then(response => response.json())
             .then(data => {
@@ -60,7 +63,7 @@ class UploadPage extends React.Component {
                     data: data,
                     counter :0
                 })
-            })
+            })*/
         }
         else if (event.target.name === 'nextPerson') {
             let currCount = this.state.counter
