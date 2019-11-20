@@ -7,6 +7,7 @@ from flask import Flask
 from flask import jsonify
 from flask_cors import CORS
 import flask
+import os
 app = Flask(__name__)
 CORS(app)
 
@@ -57,66 +58,73 @@ def detect_document(path):
     
     return returnstring
 
-# extract any .zip files in the uploadimage directory
-for filename in os.listdir("uploadimage"):
-    if filename.lower().endswith(".zip"):
-        with zipfile.ZipFile("uploadimage\\"+filename, 'r') as zip_ref:
-            zip_ref.extractall("uploadimage")
+def runocr():
+    credential_path = '/Users/thanphan/Desktop/CS179/final-project-care-package-crew/million-thanks-back-end/ocr/license.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
+    # extract any .zip files in the uploadimage directory
+    for filename in os.listdir("uploadimage"):
+        if filename.lower().endswith(".zip"):
+            with zipfile.ZipFile("uploadimage\\"+filename, 'r') as zip_ref:
+                zip_ref.extractall("uploadimage")
 
-#perform ocr on any jpg in uploadimage
-# imgcount = 1
-# for filename in os.listdir("uploadimage"):
-#     if filename.lower().endswith(".jpg"):
-#         print("Image " + str(imgcount) + ":\n")
-#         print(detect_document("uploadimage\\" + filename))
-#         imgcount += 1
-#         print("-------------------------------\n")
+    #perform ocr on any jpg in uploadimage
+    # imgcount = 1
+    # for filename in os.listdir("uploadimage"):
+    #     if filename.lower().endswith(".jpg"):
+    #         print("Image " + str(imgcount) + ":\n")
+    #         print(detect_document("uploadimage\\" + filename))
+    #         imgcount += 1
+    #         print("-------------------------------\n")
 
-jsonarray = []
-for filename in os.listdir("uploadimage"):
-    if filename.lower().endswith(".jpg"):
-        output = detect_document("uploadimage/" + filename)
-        output = output.replace(",", "")
-        outputsplit = output.split()
-        # zip = outputsplit[len(outputsplit)-1]
-        # state = outputsplit[len(outputsplit)-2]
-        # city = outputsplit[len(outputsplit)-3]
-        # print(city + ", " + state + ", " + zip)
+    jsonarray = []
+    for filename in os.listdir("uploadimage"):
+        if filename.lower().endswith(".jpg"):
+            output = detect_document("uploadimage/" + filename)
+            output = output.replace(",", "")
+            outputsplit = output.split()
+            # zip = outputsplit[len(outputsplit)-1]
+            # state = outputsplit[len(outputsplit)-2]
+            # city = outputsplit[len(outputsplit)-3]
+            # print(city + ", " + state + ", " + zip)
 
-        parsedaddress = usaddress.tag(output)
-        # print(parsedaddress)  
-        # print(parsedaddress[0])
-        # print(parsedaddress[0]['Recipient'])
-        name = parsedaddress[0]['Recipient']
-        # print(parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType'])
-        # address = parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']
-        streetnumber = parsedaddress[0]['AddressNumber']
-        address = parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']        
-        # print(parsedaddress[0]['PlaceName'])
-        city = parsedaddress[0]['PlaceName']
-        # print(parsedaddress[0]['StateName'])
-        state = parsedaddress[0]['StateName']
-        # print(parsedaddress[0]['ZipCode'])
-        zip = parsedaddress[0]['ZipCode']
-        customer_street = streetnumber + " " + address
+            parsedaddress = usaddress.tag(output)
+            # print(parsedaddress)  
+            # print(parsedaddress[0])
+            # print(parsedaddress[0]['Recipient'])
+            name = parsedaddress[0]['Recipient']
+            # print(parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType'])
+            # address = parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']
+            streetnumber = parsedaddress[0]['AddressNumber']
+            address = parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']        
+            # print(parsedaddress[0]['PlaceName'])
+            city = parsedaddress[0]['PlaceName']
+            # print(parsedaddress[0]['StateName'])
+            state = parsedaddress[0]['StateName']
+            # print(parsedaddress[0]['ZipCode'])
+            zip = parsedaddress[0]['ZipCode']
+            customer_street = streetnumber + " " + address
 
-        
-        data = {}
-        # data['streetnumber'] = streetnumber
-        # data['name'] = name
-        # data['address'] = address
-        # data['city'] = city
-        # data['state'] = state
-        # data['zip'] = zip
-        data['customer_name'] = name
-        data['customer_street'] = customer_street
-        data['customer_city'] = city
-        data['customer_state'] = state
-        data['customer_zip'] = zip
+            
+            data = {}
+            # data['streetnumber'] = streetnumber
+            # data['name'] = name
+            # data['address'] = address
+            # data['city'] = city
+            # data['state'] = state
+            # data['zip'] = zip
+            data['customer_name'] = name
+            data['customer_street'] = customer_street
+            data['customer_city'] = city
+            data['customer_state'] = state
+            data['customer_zip'] = zip
 
-        jsonarray.append(data)
+            jsonarray.append(data)
 
-json_data = json.dumps(jsonarray)
+    json_data = json.dumps(jsonarray)
+
+    return json_data
+
+'''
 print(json_data)
 @app.route('/')
 def processjson():
@@ -126,3 +134,4 @@ app.run(host='localhost', port=3300)
 # @app.route('/test', methods = ['POST'])
 # def index():
 #     return json_data
+'''

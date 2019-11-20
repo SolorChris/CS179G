@@ -3,10 +3,6 @@ let multer = require('multer')
 let cors = require('cors')
 app.use(cors())
 
-app.get('/', function(req, res) {
-    res.send('<h1>hello</h1><script src="/socket.io/socket.io.js"></script><script>var socket = io() </script>')
-})
-
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
     cb(null, 'uploadimage')
