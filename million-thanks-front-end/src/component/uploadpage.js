@@ -97,8 +97,15 @@ class UploadPage extends React.Component {
                 [name]: value
             });
         }
- 
- 
+    }
+
+    renderElement() {
+        if (this.state.display === null) {
+            return(<p></p>)
+        }
+        return(
+            <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
+        )
     }
 
     render() {
@@ -123,8 +130,8 @@ class UploadPage extends React.Component {
                     <input type="text" name="customer_city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
                     <input type="text" name="customer_state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
                     <input type="text" name="customer_zip" className="textField" placeholder="zip" value={this.state.customer_zip} onChange={this.handleChange}></input>
-                    <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
                 </form>
+                {this.renderElement()}
                 </div>
             </div>
         )
