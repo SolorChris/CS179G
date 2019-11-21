@@ -69,7 +69,7 @@ label {
     top: 2px;
 }
 
-.uploadbutton {
+.normalButton {
     background-color: #3EACD5;
     color: white;
     padding: 5px 5px;
@@ -78,58 +78,9 @@ label {
     border-radius: 10px;  
     border-color: #3EACD5;
     border-style: solid;
-    position: relative;
-    top: 28px;
-    left: -259px;
-
-   
-}
-.confirmbutton {
-    background-color: #3EACD5;
-    color: white;
-    padding: 5px 5px;
-    text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
-    border-color: #3EACD5;
-    border-style: solid;
-    position: relative;
-    top:-135px;
-    left:870px;
-}
-.normalButton3 {
-    background-color: #3EACD5;
-    color: white;
-    padding: 5px 5px;
-    text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
-    border-color: #3EACD5;
-    border-style: solid;
-}
-.personbutton {
-    background-color: #3EACD5;
-    color: white;
-    padding: 5px 5px;
-    text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
-    border-color: #3EACD5;
-    border-style: solid;
-    position: relative;
-    top:-135px;
-    left: -210px;
-
 }
 
-.dataget {
-height: 544px;
-width: 1080px;
-border-radius: 10px;
-position: relative;
-left: 330px;
-top:-125px;
-}
+
 
 .normalButton:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
@@ -139,7 +90,6 @@ top:-125px;
     padding: 5px 12px;
     text-align: center;
     font-size: 12px;
-    border-radius: 30px;
     border: solid;
     position: relative;
     top: 5px;
