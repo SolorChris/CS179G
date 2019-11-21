@@ -4,7 +4,7 @@ var express = require('express'),
     pg = require('pg'),
     app = express();
 
-var conString = "postgres://ian:ian@localhost:9001/CPC_DB";
+var conString = "postgres://db_admin:db_admin@localhost:9001/CPC_DB";
 
 const client = new pg.Client({
     connectionString: conString
