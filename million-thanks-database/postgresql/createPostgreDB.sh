@@ -5,8 +5,11 @@ export PGDATA=$folder/data
 export PGSOCKETS=$folder/sockets
 export PGPORT=9001
 
-/usr/lib/postgresql/11/bin/createdb -h localhost -p $PGPORT "CPC_DB"
-/usr/lib/postgresql/11/bin/pg_ctl status
+PATH=/usr/lib/postgresql/11/bin:$PATH
+export PATH
+
+createdb -h localhost -p $PGPORT "CPC_DB"
+pg_ctl status
 
 
 

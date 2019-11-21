@@ -35,8 +35,12 @@ class UploadPage extends React.Component {
         if (event.target.name === 'searchButton') {
             this.props.history.push('/search')
         }  
+        else if (event.target.name === 'mapButton') {
+            this.props.history.push('/analyticmap')
+        }
         else if (event.target.name === 'uploadFile') {
             console.log(this.state.uploadFile)
+            console.log("heelo")
             const image = new FormData()
             image.append('file', this.state.uploadFile)
             
@@ -49,7 +53,9 @@ class UploadPage extends React.Component {
                 this.setState({uploadFile : null})
                 this.setState({display : this.state.getimage})
             })
-            fetch('http:/localhost:3300/readytorun?run=yes')
+            fetch('http://localhost:8000/?filename=' + this.state.uploadFile['name'])
+
+            /* comment out for debug
             fetch('http://localhost:3300/')
             .then(response => response.json())
             .then(data => {
@@ -63,7 +69,7 @@ class UploadPage extends React.Component {
                     data: data,
                     counter :0
                 })
-            })
+            })*/
         }
         else if (event.target.name === 'nextPerson') {
             let currCount = this.state.counter
@@ -100,8 +106,15 @@ class UploadPage extends React.Component {
                 [name]: value
             });
         }
- 
- 
+    }
+
+    renderElement() {
+        if (this.state.display === null) {
+            return(<p></p>)
+        }
+        return(
+            <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
+        )
     }
 
     render() {
@@ -111,6 +124,7 @@ class UploadPage extends React.Component {
                     <img src={logo} alt={"million thanks"} height="70" width="150"/>
                     <button name= "uploadButton" type="button" className="clickButton" onClick={this.handleClick}>upload</button>
                     <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
+                    <button name= "mapButton" type="button" className="notClickButton" onClick={this.handleClick}>analytic map</button>
                 </div>
                 <input name= "selectFile" type="file" className="hide" id="doupload" onChange={this.handleChange}/>
                 <label for="doupload"><img src={upbox} alt={"upload icon"} className="upstyle" height="157" width="259" /></label>
@@ -120,14 +134,13 @@ class UploadPage extends React.Component {
                 <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button>
                 <div className="dataget">
                 <form>
-                    <input type="text" name="recipient" className="textField" placeholder="recipient" value={this.state.recipient} onChange={this.handleChange}></input>
-                    <input type="text" name="streetNumber" className="textField" placeholder="street number" value={this.state.streetNumber} onChange={this.handleChange}></input>
-                   {/* <input type="text" name="streetName" className="textField" placeholder="street name" value={this.state.streetName} onChange={this.handleChange}></input> */}
-                    <input type="text" name="city" className="textField" placeholder="city" value={this.state.city} onChange={this.handleChange}></input>
-                    <input type="text" name="state" className="textField" placeholder="state" value={this.state.state} onChange={this.handleChange}></input>
-                    <input type="text" name="zipcode" className="textField" placeholder="zipcode" value={this.state.zipcode} onChange={this.handleChange}></input>
-                    <img src={this.state.display} className= "imagepos" height="465" width="465" alt=" "/>
+                    <input type="text" name="customer_name" className="textField" placeholder="name" value={this.state.customer_name} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_street" className="textField" placeholder="street" value={this.state.customer_street} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
+                    <input type="text" name="customer_zip" className="textField" placeholder="zip" value={this.state.customer_zip} onChange={this.handleChange}></input>
                 </form>
+                {this.renderElement()}
                 </div>
             </div>
         )

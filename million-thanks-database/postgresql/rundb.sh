@@ -3,9 +3,21 @@
 #port = 9001
 #database = CPC_DB
 
+folder=/tmp/CPC
+export PGDATA=$folder/data
+export PGSOCKETS=$folder/sockets
+export PGPORT=9001
+
+PATH=/usr/lib/postgresql/11/bin:$PATH
+export PATH
+
 ./startPostgreSQL.sh
+
+sleep 1
+
 ./createPostgreDB.sh
 
+sleep 1
 
 # to stop type:
 #./stopPostgreDB.sh
