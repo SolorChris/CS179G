@@ -23,6 +23,12 @@ class UploadPage extends React.Component {
 
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        function importAll (r) {
+            r.keys().forEach(r);
+          }
+          
+         // imgbrowse = importAll(require.context('this.state.display', false, /\.(png|jpe?g|svg)$/));
+        
     }
 
     handleClick(event) {
