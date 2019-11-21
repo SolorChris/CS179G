@@ -44,26 +44,9 @@ class UploadPage extends React.Component {
             .then(res => {
                 console.log(res.statusText)
                 console.log(this.state.getimage)
-                this.setState({uploadFile : null})
+                //this.setState({uploadFile : null})
                 this.setState({display : this.state.getimage})
             })
-            /*
-            fetch('http://localhost:8000/?filename=' + this.state.uploadFile['name'])
-
-            fetch('http://localhost:8000/')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                this.setState({ 
-                    customer_name: data['customer_name'],
-                    customer_street: data['customer_street'],
-                    customer_city: data['customer_city'],
-                    customer_state: data['customer_state'],
-                    customer_zip: data['customer_zip'],
-                    data: data,
-                    counter :1
-                })
-            })*/
         }
         else if (event.target.name === 'nextPerson') {
             let currCount = this.state.counter
@@ -85,8 +68,11 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === "runocr") {
             console.log('hello')
-            console.log('ocr ' + this.state.uploadFile['name'])
-            /*
+            if (this.state.uploadFile === null) {
+                console.log('ocr1')
+                return
+            }
+            console.log('ocr2 ' + this.state.uploadFile['name'])
             fetch('http://localhost:8000/?filename=' + this.state.uploadFile['name'])
 
             fetch('http://localhost:8000/')
@@ -94,15 +80,17 @@ class UploadPage extends React.Component {
             .then(data => {
                 console.log(data)
                 this.setState({ 
-                    customer_name: data['customer_name'],
-                    customer_street: data['customer_street'],
-                    customer_city: data['customer_city'],
-                    customer_state: data['customer_state'],
-                    customer_zip: data['customer_zip'],
+                    customer_name: data[0]['customer_name'],
+                    customer_street: data[0]['customer_street'],
+                    customer_city: data[0]['customer_city'],
+                    customer_state: data[0]['customer_state'],
+                    customer_zip: data[0]['customer_zip'],
                     data: data,
                     counter :1
                 })
-            })*/
+            })
+            
+            this.setState({uploadFile:null})
         }
     }
 
@@ -140,24 +128,25 @@ class UploadPage extends React.Component {
                     <button name= "uploadButton" type="button" className="clickButton" onClick={this.handleClick}>upload</button>
                     <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
                     <button name= "mapButton" type="button" className="notClickButton" onClick={this.handleClick}>analytic map</button>
+                    <button name="runocr" type="button" onClick={this.handleClick}>run ocr</button>
+
                 </div>
                     <input name= "selectFile" type="file" className="hide" id="doupload" onChange={this.handleChange}/>
                     <label for="doupload"><img src={upbox} alt={"upload icon"} className="upstyle" height="157" width="259" /></label>
                     
                     <button name= "uploadFile" className="uploadbutton" type="button" onClick={this.handleClick}>upload selected file</button>
-                    <button name="runocr" type="button" onClick={this.handleClick}>run ocr</button>
                     <button name= "confirmButton" className="confirmbutton" type="button" onClick={this.handleClick} >confirm address</button>
                     <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button>
                     <div className="dataget">
-                    <form>
-                        <input type="text" name="customer_name" className="textField" placeholder="name" value={this.state.customer_name} onChange={this.handleChange}></input>
-                        <input type="text" name="customer_street" className="textField" placeholder="street" value={this.state.customer_street} onChange={this.handleChange}></input>
-                        <input type="text" name="customer_city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
-                        <input type="text" name="customer_state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
-                        <input type="text" name="customer_zip" className="textField" placeholder="zip" value={this.state.customer_zip} onChange={this.handleChange}></input>
-                    </form>
-                    {this.renderElement()}
-                </div>
+                        <form>
+                            <input type="text" name="customer_name" className="textField" placeholder="name" value={this.state.customer_name} onChange={this.handleChange}></input>
+                            <input type="text" name="customer_street" className="textField" placeholder="street" value={this.state.customer_street} onChange={this.handleChange}></input>
+                            <input type="text" name="customer_city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
+                            <input type="text" name="customer_state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
+                            <input type="text" name="customer_zip" className="textField" placeholder="zip" value={this.state.customer_zip} onChange={this.handleChange}></input>
+                        </form>
+                        {this.renderElement()}
+                    </div>
             </div>
         )
     }
