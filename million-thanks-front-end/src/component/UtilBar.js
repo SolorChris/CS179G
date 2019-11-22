@@ -1,10 +1,8 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import ToolBar from '@material-ui/core/Toolbar'
-import blue from '@material-ui/core/colors/blue';
-import red from '@material-ui/core/colors/red';
-import { blueGrey } from '@material-ui/core/colors';
-
+import {  blue, red, blueGrey } from '@material-ui/core/colors';
+import Grid from '@material-ui/core/Grid'
 
 
 const theme = {
@@ -25,49 +23,68 @@ const theme = {
         darkA: red.A700,
     },
     tertiary: {
-        light: blueGrey[300],
-        main: blueGrey[500],
-        dark: blueGrey[700],
+        light: blueGrey[100],
+        main: blueGrey[300],
+        dark: blueGrey[500],
     },
       
   };
+
 
 
 export const UtilBar = ({onChange, onClick, page}) => {
     switch(page) {
         case "upload":
                 return (
-                    <div>
-                        <AppBar position="static" style={{ background: theme.primary.light }}>
-                            <ToolBar>
-                            <div>
-                                <input name= "selectFile" type="file" id="doupload" onChange={onChange}/>
-                                <button name= "uploadFile" className="normalButton" type="button" onClick={onChange}>upload selected file</button>
-                                <button name="runocr" className="normalButton" type="button" onClick={onClick}>Get Address</button>
-                            </div>
+                        <AppBar position="static" style={{ background: theme.primary.dark, height: 30, }} >
+                            <ToolBar style={{margin:0, padding:0}}>
+                                <Grid container direction="row" alignItems="center" spacing={1} style={{marginLeft: 5, marginBottom:30}}>
+                                    <Grid item >
+                                        <input name= "selectFile" type="file" id="doupload" onChange={onChange}  />
+                                    </Grid>
+                                    <Grid item >
+                                        <button name= "uploadFile" className="utilButton" type="button" onClick={onChange} style={{backgroundColor: theme.tertiary.main, borderColor: theme.tertiary.main}}>upload selected file</button>
+                                    </Grid>
+                                    <Grid item >
+                                        <button name="runocr" className="utilButton" type="button" onClick={onClick} style={{backgroundColor: theme.tertiary.main, borderColor: theme.tertiary.main}}>Get Address</button>
+                                    </Grid>
+                                </Grid>
                             </ToolBar>
                         </AppBar>
-                    </div>
                 )
         case "search":
                 return (
-                    <div>
-                        <AppBar position="static" style={{ background: theme.primary.light }}>
-                            <ToolBar>
-                                <div>
-                                    <input type="text" name="searchText" className="textField2" placeholder="search..." onChange={onChange} ></input>
-                                    <select name="filter" onChange={onChange} >
-                                        <option value="name">name</option>
-                                        <option value="street">street</option>
-                                        <option value="city">city</option>
-                                        <option value="state">state</option>
-                                        <option value="zip">zip</option>
-                                    </select>
-                                    <button name= "submitButton" type="button" className="normalButton3" onClick={onClick}>submit</button>
-                                </div>
+                        <AppBar position="static" style={{ background: theme.primary.dark, height: 30 }}>
+                            <ToolBar style={{margin:0, padding:0}}>
+                                <Grid container direction="row" alignItems="center" spacing={1} style={{marginLeft: 5, marginBottom:30}}>
+                                    <Grid item >
+                                        <input type="text" name="searchText" className="textField2" placeholder="search..." onChange={onChange} ></input>
+                                    </Grid>
+                                    <Grid item >
+                                        <select name="filter" onChange={onChange} >
+                                            <option value="name">name</option>
+                                            <option value="street">street</option>
+                                            <option value="city">city</option>
+                                            <option value="state">state</option>
+                                            <option value="zip">zip</option>
+                                        </select>
+                                    </Grid>
+                                    <Grid item >
+                                        <button name= "submitButton" type="button" className="normalButton3" onClick={onClick}>submit</button>
+                                    </Grid>
+                                </Grid>
                             </ToolBar>
                         </AppBar>
-                    </div>
+                )
+        case "analytic":
+                return (
+                        <AppBar position="static" style={{ background: theme.primary.dark, height: 30 }}>
+                            <ToolBar style={{margin:0, padding:0}}>
+                                <Grid container direction="row" alignItems="center" spacing={1} style={{marginLeft: 5, marginBottom:30}}>
+                                    
+                                </Grid>
+                            </ToolBar>
+                        </AppBar>
                 )
     }
     

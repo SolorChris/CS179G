@@ -1,12 +1,19 @@
 import React from 'react'
 import '../index.css'
-import {makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper, TextField}from '@material-ui/core'
 import axios from 'axios'
 import {add} from './db_connect'
 import NavBar from './NavBar'
 import UtilBar from './UtilBar'
 import DataList from './DataList'
+import Grid from '@material-ui/core/Grid'
 
+
+const styles = {
+    grid: {
+        paddingLeft: 0,
+        paddingRight: 0
+    },
+};
 
 
 class UploadPage extends React.Component {
@@ -130,11 +137,14 @@ class UploadPage extends React.Component {
 
     render() {
         return(
-            <div>
-                <NavBar onClick={this.handleClick} page="upload"></NavBar>
-                <UtilBar onClick={this.handleClick} onChange={this.handleChange} page="upload"></UtilBar>
-                <DataList handle={this.updateTable} data={this.state.data} display={this.state.displayTable} page="upload" ></DataList>
-            </div>
+            <Grid container style={styles.grid} direction="column" alignItems="stretch">
+                <Grid item >
+                    <NavBar onClick={this.handleClick} page="upload" ></NavBar>
+                    <UtilBar onClick={this.handleClick} onChange={this.handleChange} page="upload"></UtilBar>
+                    <DataList handle={this.updateTable} data={this.state.data} display={this.state.displayTable} page="upload" ></DataList>
+                </Grid>
+            </Grid>
+            
         )
     }
 }

@@ -3,6 +3,8 @@ import ReactMapGL, {Marker, Popup} from 'react-map-gl'
 import '../index.css'
 import mapMarker from './marker.png'
 import NavBar from './NavBar'
+import UtilBar from './UtilBar'
+
 
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoidGhhbnBoYW4iLCJhIjoiY2syenR4eTRxMGxpdDNvczFkdXpwdzdoOCJ9.KrNalqwF-I2hxXP9ikMzVA'
@@ -60,6 +62,8 @@ class AnalyticMap extends React.Component {
         return(
             <div>
                 <NavBar onClick={this.handleClick} page="analytic" ></NavBar>
+                <UtilBar page="analytic" ></UtilBar>
+                
                 <div>
                     <ReactMapGL 
                         {...this.state.viewport} 

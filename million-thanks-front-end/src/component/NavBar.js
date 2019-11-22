@@ -2,8 +2,10 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import ToolBar from '@material-ui/core/Toolbar'
 import logo from './images/assets/banner_logo.png'
-import {  blue, red, blueGrey } from '@material-ui/core/colors';
+import { blue, red, blueGrey } from '@material-ui/core/colors';
 import '../index.css'
+import Grid from '@material-ui/core/Grid'
+
 
 
 
@@ -36,48 +38,55 @@ export const NavBar = ({onClick, page}) => {
     switch(page) {
         case "upload":
                 return (
-                    <div>
-                        <AppBar position="static" style={{ background: theme.tertiary.main }}>
-                            <ToolBar>
-                                <div>
-                                    <img src={logo} alt={"million thanks"} height="40" width="120" style={{marginTop:5, marginRight:10}}/>
-                                    <button name= "uploadButton" type="button" className="clickButton" onClick={onClick}>upload</button>
-                                    <button name= "searchButton" type="button" className="notClickButton" onClick={onClick}>search</button>
-                                    <button name= "mapButton" type="button" className="notClickButton" onClick={onClick}>analytic map</button>
-                                </div>
+                        <AppBar position="static" style={{ background: theme.tertiary.main, height:60}}>
+                            <ToolBar style={{margin:0, padding:0}}>
+                                <Grid container direction="row" alignItems="flex-end" spacing={1}>
+                                    <Grid item >
+                                        <img src={logo} height="40" width="120" style={{marginLeft: 5}}/>
+                                    </Grid>
+                                    <Grid item >
+                                        <button name= "uploadButton" type="button" className="clickButton" style={{background: theme.primary.dark, borderColor: theme.primary.dark, marginLeft: 5}} onClick={onClick}>upload</button>
+                                        <button name= "searchButton" type="button" className="notClickButton" onClick={onClick}>search</button>
+                                        <button name= "mapButton" type="button" className="notClickButton" onClick={onClick}>analytic map</button>
+                                    </Grid>
+                                        
+                                </Grid>
                             </ToolBar>
                         </AppBar>
-                    </div>
                 )
         case "search":
                 return (
-                    <div>
-                        <AppBar position="static" style={{ background: theme.tertiary.main }}>
-                            <ToolBar>
-                                <div>
-                                    <img src={logo} alt={"million thanks"} height="40" width="120" style={{marginTop:5, marginRight:10}}/>
-                                    <button name= "uploadButton" type="button" className="notClickButton" onClick={onClick}>upload</button>
-                                    <button name= "searchButton" type="button" className="clickButton" onClick={onClick}>search</button>
-                                    <button name= "mapButton" type="button" className="notClickButton" onClick={onClick}>analytic map</button>
-                                </div>
+                        <AppBar position="static" style={{ background: theme.tertiary.main, height:60 }}>
+                            <ToolBar style={{margin:0, padding:0}}>
+                            <Grid container direction="row" alignItems="flex-end" spacing={1} >
+                                    <Grid item >
+                                        <img src={logo} height="40" width="120" style={{marginLeft: 5}}/>
+                                    </Grid>
+                                    <Grid item >
+                                        <button name= "uploadButton" type="button" className="notClickButton" style={{marginLeft: 5}} onClick={onClick}>upload</button>
+                                        <button name= "searchButton" type="button" className="clickButton" style={{background: theme.primary.dark, borderColor: theme.primary.dark}} onClick={onClick}>search</button>
+                                        <button name= "mapButton" type="button" className="notClickButton" onClick={onClick}>analytic map</button>
+                                    </Grid>
+                                </Grid>
                             </ToolBar>
                         </AppBar>
-                    </div>
                 )
         case "analytic":
                 return (
-                    <div>
-                        <AppBar position="static" style={{ background: theme.tertiary.main }}>
-                            <ToolBar>
-                                <div>
-                                <   img src={logo} alt={"million thanks"} height="40" width="120" style={{marginTop:5, marginRight:10}}/>
-                                    <button name= "uploadButton" type="button" className="notClickButton" onClick={onClick}>upload</button>
-                                    <button name= "searchButton" type="button" className="notClickButton" onClick={onClick}>search</button>
-                                    <button name= "mapButton" type="button" className="clickButton" onClick={onClick}>analytic map</button>
-                                </div>
+                        <AppBar position="static" style={{ background: theme.tertiary.main, height:60 }}>
+                            <ToolBar style={{margin:0, padding:0}}>
+                            <Grid container direction="row" alignItems="flex-end" spacing={1}>
+                                    <Grid item >
+                                        <img src={logo} height="40" width="120" style={{marginLeft: 5}}/>
+                                    </Grid>
+                                    <Grid item >
+                                        <button name= "uploadButton" type="button" className="notClickButton" style={{marginLeft: 5}} onClick={onClick}>upload</button>
+                                        <button name= "searchButton" type="button" className="notClickButton" onClick={onClick}>search</button>
+                                        <button name= "mapButton" type="button" className="clickButton" style={{background: theme.primary.dark, borderColor: theme.primary.dark}} onClick={onClick}>analytic map</button>
+                                    </Grid>
+                                </Grid>
                             </ToolBar>
                         </AppBar>
-                    </div>
                 )
     }
     
