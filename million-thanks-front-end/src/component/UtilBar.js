@@ -70,7 +70,7 @@ export const UtilBar = ({onChange, onClick, page}) => {
                                         </select>
                                     </Grid>
                                     <Grid item >
-                                        <button name= "submitButton" type="button" className="normalButton3" onClick={onClick}>submit</button>
+                                        <button name= "submitButton" type="button" className="utilButton" onClick={onClick} style={{backgroundColor: theme.tertiary.main, borderColor: theme.tertiary.main}}>submit</button>
                                     </Grid>
                                 </Grid>
                             </ToolBar>
@@ -81,7 +81,7 @@ export const UtilBar = ({onChange, onClick, page}) => {
                         <AppBar position="static" style={{ background: theme.primary.dark, height: 30 }}>
                             <ToolBar style={{margin:0, padding:0}}>
                                 <Grid container direction="row" alignItems="center" spacing={1} style={{marginLeft: 5, marginBottom:30}}>
-                                    
+
                                 </Grid>
                             </ToolBar>
                         </AppBar>
