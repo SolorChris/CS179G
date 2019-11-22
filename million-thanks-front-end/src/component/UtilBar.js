@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid'
 
 const theme = {
     primary: {
-        light: blue[300],
+        light: blue[100],
         main: blue[500],
         dark: blue[700],
         lightA: blue.A200,
@@ -58,7 +58,7 @@ export const UtilBar = ({onChange, onClick, page}) => {
                             <ToolBar style={{margin:0, padding:0}}>
                                 <Grid container direction="row" alignItems="center" spacing={1} style={{marginLeft: 5, marginBottom:30}}>
                                     <Grid item >
-                                        <input type="text" name="searchText" className="textField2" placeholder="search..." onChange={onChange} ></input>
+                                        <input type="text" name="searchText" className="textField2" placeholder="search..." onChange={onChange} style={{backgroundColor: theme.primary.light, borderColor: theme.tertiary.main}}></input>
                                     </Grid>
                                     <Grid item >
                                         <select name="filter" onChange={onChange} >
