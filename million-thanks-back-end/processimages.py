@@ -59,7 +59,7 @@ def detect_document(path):
     return returnstring
 
 def runocr(files):
-    credential_path = '/Users/thanphan/Desktop/CS179/final-project-care-package-crew/million-thanks-back-end/ocr/license.json'
+    credential_path = '/home/ian/Documents/CS_179/final-project-care-package-crew/million-thanks-back-end/ocr/license.json'
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
     # extract any .zip files in the uploadimage directory
     for filename in os.listdir("uploadimage"):

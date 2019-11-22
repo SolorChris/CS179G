@@ -1,9 +1,13 @@
 import React from 'react'
 import '../index.css'
-import logo from './images/assets/banner_logo.png'
 import {makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper, TextField}from '@material-ui/core'
 import axios from 'axios'
 import {add} from './db_connect'
+import NavBar from './NavBar'
+import UtilBar from './UtilBar'
+import DataList from './DataList'
+
+
 
 class UploadPage extends React.Component {
     constructor() {
@@ -16,7 +20,7 @@ class UploadPage extends React.Component {
             customer_zip : "",
             uploadFile: null,
             getimage: null,
-            display: null,
+            displayTable: false,
             count: 0,
             data: null
         }
@@ -124,77 +128,12 @@ class UploadPage extends React.Component {
         this.setState({data:temp}, () => console.log(this.state.data))
     }
 
-    renderElement() {
-        if (this.state.data === null) {
-            return(<p></p>)
-        }
-        const classes = makeStyles(theme => ({
-            root: {
-            width: '100%',
-            marginTop: theme.spacing(3),
-            overflowX: 'auto',
-            },
-            table: {
-            minWidth: 650,
-            },
-        }))
-        console.log(this.state.data)
-        return (
-        <div>
-            <Paper className={classes.root}>
-            <Table className={classes.table}>
-            <TableHead>
-                <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell align="right">Street</TableCell>
-                    <TableCell align="right">City</TableCell>
-                    <TableCell align="right">State</TableCell>
-                    <TableCell align="right">Zip</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {this.state.data.map((row,i) => (
-                <TableRow key={i}>
-                    <TableCell component="th" scope="row">
-                        <TextField value={row.customer_name} onChange={e => this.updateTable(e, i, "customer_name")}/>
-                    </TableCell>
-                    <TableCell align="right">
-                        <TextField value={row.customer_street} onChange={e => this.updateTable(e, i, "customer_street")}/>
-                    </TableCell>
-                    <TableCell align="right">
-                        <TextField value={row.customer_city} onChange={e => this.updateTable(e, i, "customer_city")}/>
-                    </TableCell>
-                    <TableCell align="right">
-                        <TextField value={row.customer_state} onChange={e => this.updateTable(e, i, "customer_state")}/>
-                    </TableCell>
-                    <TableCell align="right">
-                        <TextField value={row.customer_zip} onChange={e => this.updateTable(e, i, "customer_zip")}/>
-                    </TableCell>
-                </TableRow>
-                ))}
-            </TableBody>
-            </Table>
-            </Paper>
-            <button name= "confirmButton" className="normalButton" type="button" onClick={this.handleClick} >confirm</button>
-        </div>
-        )
-    }
-
     render() {
         return(
             <div>
-                <div className="header">
-                    <img src={logo} alt={"million thanks"} height="70" width="150"/>
-                    <button name= "uploadButton" type="button" className="clickButton" onClick={this.handleClick}>upload</button>
-                    <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
-                    <button name= "mapButton" type="button" className="notClickButton" onClick={this.handleClick}>analytic map</button>
-                </div>
-                <div>
-                    <input name= "selectFile" type="file" id="doupload" onChange={this.handleChange}/>
-                    <button name= "uploadFile" className="normalButton" type="button" onClick={this.handleClick}>upload selected file</button>
-                    <button name="runocr" className="normalButton" type="button" onClick={this.handleClick}>Get Address</button>
-                    {this.renderElement()}
-                </div>
+                <NavBar onClick={this.handleClick} page="upload"></NavBar>
+                <UtilBar onClick={this.handleClick} onChange={this.handleChange} page="upload"></UtilBar>
+                <DataList handle={this.updateTable} data={this.state.data} display={this.state.displayTable} page="upload" ></DataList>
             </div>
         )
     }

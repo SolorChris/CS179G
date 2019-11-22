@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactMapGL, {Marker, Popup} from 'react-map-gl'
 import '../index.css'
-import logo from './images/assets/banner_logo.png'
 import mapMarker from './marker.png'
+import NavBar from './NavBar'
+
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoidGhhbnBoYW4iLCJhIjoiY2syenR4eTRxMGxpdDNvczFkdXpwdzdoOCJ9.KrNalqwF-I2hxXP9ikMzVA'
 
@@ -58,12 +59,7 @@ class AnalyticMap extends React.Component {
     render() {
         return(
             <div>
-                <div className="header">
-                    <img src={logo} alt={"million thanks"} height="70" width="150"/>
-                    <button name= "uploadButton" type="button" className="notClickButton" onClick={this.handleClick}>upload</button>
-                    <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
-                    <button name= "mapButton" type="button" className="clickButton" onClick={this.handleClick}>analytic map</button>
-                </div>
+                <NavBar onClick={this.handleClick} page="analytic" ></NavBar>
                 <div>
                     <ReactMapGL 
                         {...this.state.viewport} 
