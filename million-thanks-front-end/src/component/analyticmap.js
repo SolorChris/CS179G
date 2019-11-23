@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactMapGL, {Marker, Popup} from 'react-map-gl'
+import ReactMapGL, {Marker} from 'react-map-gl'
 import '../index.css'
 import mapMarker from './marker.png'
 import NavBar from './NavBar'

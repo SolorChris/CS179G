@@ -137,6 +137,7 @@ export const DataList = ({handle, data, display, page}) => {
                     </div>
                     )
             }
+        default: return(<div></div>)
             
     }
     

@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../index.css'
 import NavBar from './NavBar'
 import UtilBar from './UtilBar'
 import DataList from './DataList'
+
+const hostIP = "10.42.0.1"
 
 
 class SearchPage extends React.Component {
@@ -38,7 +40,7 @@ class SearchPage extends React.Component {
         else if (event.target.name === "submitButton") {
             this.setState({displayTable : false})
             if(this.state.searchText) {
-                return fetch("http://localhost:3200/search?text=" + this.state.searchText + "&filter=" + this.state.filter)
+                return fetch("http://" + hostIP + ":3200/search?text=" + this.state.searchText + "&filter=" + this.state.filter)
                 .then(response => response.json())
                 .then(data => {
                     this.setState({ addresses: data,

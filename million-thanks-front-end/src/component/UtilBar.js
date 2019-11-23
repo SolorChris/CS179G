@@ -86,6 +86,7 @@ export const UtilBar = ({onChange, onClick, page}) => {
                             </ToolBar>
                         </AppBar>
                 )
+        default: return(<div></div>)
     }
     
 }

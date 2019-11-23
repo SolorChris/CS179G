@@ -1,5 +1,9 @@
 // import {sendResults} from './front_connect'
 
+
+
+const hostIP = '10.42.0.1'
+
 var express = require('express'),
     pg = require('pg'),
     app = express();
@@ -11,6 +15,7 @@ const client = new pg.Client({
 });
 
 client.connect();
+
 
 
 
@@ -83,6 +88,15 @@ app.get('/analyticMap', function(req, resp){
 
 app.get('/search', function(req, resp){
   const {text, filter} = req.query
+  let ip = req.connection.remoteAddress;
+  ip = ip.replace('::', '/')
+  ip = ip.replace('ffff:', '/')
+
+  if(ip === '//'+hostIP)
+    ip = 'localhost'
+  else
+    ip = hostIP
+
   var column = 'column'
   var table = 'table'
   switch(filter) {
@@ -116,7 +130,7 @@ app.get('/search', function(req, resp){
   client.query('SELECT * FROM ' + table + ' WHERE position(\'' + text + '\' in ' + column + ') > 0;', (err, res) => {
     if (err) throw err
     console.log(res.rows);
-    resp.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    resp.setHeader('Access-Control-Allow-Origin', 'http://'+ ip + ':3000' );
     resp.send(res.rows);
   });
   

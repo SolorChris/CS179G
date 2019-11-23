@@ -42,7 +42,7 @@ export const NavBar = ({onClick, page}) => {
                             <ToolBar style={{margin:0, padding:0}}>
                                 <Grid container direction="row" alignItems="flex-end" spacing={1}>
                                     <Grid item >
-                                        <img src={logo} height="40" width="120" style={{marginLeft: 5}}/>
+                                        <img src={logo} alt="million thanks" height="40" width="120" style={{marginLeft: 5}}/>
                                     </Grid>
                                     <Grid item >
                                         <button name= "uploadButton" type="button" className="clickButton" style={{background: theme.primary.dark, borderColor: theme.primary.dark, marginLeft: 5}} onClick={onClick}>upload</button>
@@ -60,7 +60,7 @@ export const NavBar = ({onClick, page}) => {
                             <ToolBar style={{margin:0, padding:0}}>
                             <Grid container direction="row" alignItems="flex-end" spacing={1} >
                                     <Grid item >
-                                        <img src={logo} height="40" width="120" style={{marginLeft: 5}}/>
+                                        <img src={logo}  alt="million thanks" height="40" width="120" style={{marginLeft: 5}}/>
                                     </Grid>
                                     <Grid item >
                                         <button name= "uploadButton" type="button" className="notClickButton" style={{marginLeft: 5}} onClick={onClick}>upload</button>
@@ -77,7 +77,7 @@ export const NavBar = ({onClick, page}) => {
                             <ToolBar style={{margin:0, padding:0}}>
                             <Grid container direction="row" alignItems="flex-end" spacing={1}>
                                     <Grid item >
-                                        <img src={logo} height="40" width="120" style={{marginLeft: 5}}/>
+                                        <img src={logo}  alt="million thanks" height="40" width="120" style={{marginLeft: 5}}/>
                                     </Grid>
                                     <Grid item >
                                         <button name= "uploadButton" type="button" className="notClickButton" style={{marginLeft: 5}} onClick={onClick}>upload</button>
@@ -88,6 +88,7 @@ export const NavBar = ({onClick, page}) => {
                             </ToolBar>
                         </AppBar>
                 )
+        default: return(<div></div>)
     }
     
 }
