@@ -40,13 +40,13 @@ export const UtilBar = ({onChange, onClick, page}) => {
                             <ToolBar style={{margin:0, padding:0}}>
                                 <Grid container direction="row" alignItems="center" spacing={1} style={{marginLeft: 5, marginBottom:30}}>
                                     <Grid item >
-                                        <input name= "selectFile" type="file" id="doupload" onChange={onChange}  />
+                                        <input name= "selectFile" type="file" id="doupload" onChange={(e) => onChange(e)}  />
                                     </Grid>
                                     <Grid item >
-                                        <button name= "uploadFile" className="utilButton" type="button" onClick={onChange} style={{backgroundColor: theme.tertiary.main, borderColor: theme.tertiary.main}}>upload selected file</button>
+                                        <button name= "uploadFile" className="utilButton" type="button" onClick={(e) =>onClick(e)} style={{backgroundColor: theme.tertiary.main, borderColor: theme.tertiary.main}}>upload selected file</button>
                                     </Grid>
                                     <Grid item >
-                                        <button name="runocr" className="utilButton" type="button" onClick={onClick} style={{backgroundColor: theme.tertiary.main, borderColor: theme.tertiary.main}}>Get Address</button>
+                                        <button name="runocr" className="utilButton" type="button" onClick={(e) =>onClick(e)} style={{backgroundColor: theme.tertiary.main, borderColor: theme.tertiary.main}}>Get Address</button>
                                     </Grid>
                                 </Grid>
                             </ToolBar>
@@ -95,4 +95,3 @@ export const UtilBar = ({onChange, onClick, page}) => {
 
 
 export default UtilBar;
-

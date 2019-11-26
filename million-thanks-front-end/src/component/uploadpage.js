@@ -46,7 +46,7 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === 'uploadFile') {
             console.log(this.state.uploadFile)
-            console.log("heelo")
+            //console.log("heelo")
             const image = new FormData()
             image.append('file', this.state.uploadFile)
             
