@@ -57,17 +57,19 @@ def detect_document(path):
                     word_text = ''.join([
                         symbol.text for symbol in word.symbols
                     ])
-                    # print(word_text)
+                    if word.confidence < 0.95:
+                        reviewBool = True
+                    # print('Word text: {} (confidence: {})'.format(word_text, word.confidence))
                     returnstring += word_text + " "
     
-    return returnstring
+    return returnstring, reviewBool
 
 def runocr(files):
     if(os.name=='posix'):
         credential_path = 'ocr/license.json'
         os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
     else:
-        os.system('$env:GOOGLE_APPLICATION_CREDENTIALS="ocr/license.json"')
+        os.system('$env:GOOGLE_APPLICATION_CREDENTIALS="license.json"')
     # extract any .zip files in the uploadimage directory
     for filename in os.listdir("uploadimage"):
         if filename.lower().endswith(".zip"):
@@ -84,9 +86,11 @@ def runocr(files):
     #         print("-------------------------------\n")
 
     jsonarray = []
+    jsonarrayreview = []
+    jsonarraynoreview = []
     for filename in os.listdir("uploadimage"):
         if filename.lower().endswith(".jpg"):
-            output = detect_document("uploadimage/" + filename)
+            (output,boolean) = detect_document("uploadimage/" + filename)
             output = output.replace(",", "")
             outputsplit = output.split()
             # zip = outputsplit[len(outputsplit)-1]
@@ -131,15 +135,22 @@ def runocr(files):
             data['customer_city'] = city
             data['customer_state'] = state
             data['customer_zip'] = zip
-            data['review'] = 'true'
             data['customer_longitude'] = longitude
             data['customer_latitude'] = latitude
+            if boolean:
+                jsonarrayreview.append(data)
+            else:
+                jsonarraynoreview.append(data)
 
-            jsonarray.append(data)
+            
 
-    json_data = json.dumps(jsonarray)
+    json_review_data = json.dumps(jsonarrayreview)
+    json_noreview_data = json.dumps(jsonarraynoreview)
 
-    return json_data
+    jsonarray.append(json_review_data)
+    jsonarray.append(json_noreview_data)
+
+    return jsonarray
 
 '''
 print(json_data)
