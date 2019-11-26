@@ -8,8 +8,12 @@ from flask import jsonify
 from flask_cors import CORS
 import flask
 import os
+from geopy.geocoders import Nominatim
+
 app = Flask(__name__)
 CORS(app)
+
+geolocator = Nominatim()
 
 def detect_document(path):
     returnstring = ""
@@ -59,8 +63,11 @@ def detect_document(path):
     return returnstring
 
 def runocr(files):
-    credential_path = '/home/ian/Documents/CS_179/final-project-care-package-crew/million-thanks-back-end/ocr/license.json'
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
+    if(os.name=='posix'):
+        credential_path = 'ocr/license.json'
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
+    else:
+        os.system('$env:GOOGLE_APPLICATION_CREDENTIALS="ocr/license.json"')
     # extract any .zip files in the uploadimage directory
     for filename in os.listdir("uploadimage"):
         if filename.lower().endswith(".zip"):
@@ -104,6 +111,13 @@ def runocr(files):
             zip = parsedaddress[0]['ZipCode']
             customer_street = streetnumber + " " + address
 
+            fulladdress = customer_street +" " + city + " " + state + " " + zip
+
+            location = geolocator.geocode(fulladdress)
+
+            longitude = location.longitude
+            latitude = location.latitude
+
             
             data = {}
             # data['streetnumber'] = streetnumber
@@ -117,6 +131,9 @@ def runocr(files):
             data['customer_city'] = city
             data['customer_state'] = state
             data['customer_zip'] = zip
+            data['review'] = 'true'
+            data['customer_longitude'] = longitude
+            data['customer_latitude'] = latitude
 
             jsonarray.append(data)
 
