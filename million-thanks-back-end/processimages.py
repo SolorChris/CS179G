@@ -146,16 +146,19 @@ def runocr(files):
                 jsonarrayreview.append(data)
             else:
                 jsonarraynoreview.append(data)
+            # jsonarray.append(data)
+            
 
-    return json.dumps(data)
+    # return json.dumps(data)
 
     # json_review_data = json.dumps(jsonarrayreview)
     # json_noreview_data = json.dumps(jsonarraynoreview)
 
-    # jsonarray.append(json_review_data)
-    # jsonarray.append(json_noreview_data)
+    jsonarray.append(jsonarrayreview)
+    jsonarray.append(jsonarraynoreview)
 
-    # return json.dumps(jsonarray)
+    return json.dumps(jsonarray)
+    # return jsonarray
 
 '''
 print(json_data)

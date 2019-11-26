@@ -6,7 +6,7 @@ import {makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper, Tex
 
 
 
-export const DataList = ({handle, data, display, page}) => {
+export const DataList = ({click, handle, data, display, page}) => {
     const classes = makeStyles(theme => ({
         root: {
         width: '100%',
@@ -36,7 +36,7 @@ export const DataList = ({handle, data, display, page}) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.data.map((row,i) => (
+                            {data[1].map((row,i) => (
                             <TableRow key={i}>
                                 <TableCell component="th" scope="row">
                                     <TextField value={row.customer_name} onChange={e => handle(e, i, "customer_name")}/>
@@ -58,6 +58,7 @@ export const DataList = ({handle, data, display, page}) => {
                         </TableBody>
                         </Table>
                         </Paper>
+                        <button name= "confirmButton" className="normalButton" type="button" onClick={click} >confirm</button>
                     </div>
                 )
             }

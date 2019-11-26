@@ -60,31 +60,33 @@ class UploadPage extends React.Component {
                 this.setState({display : this.state.getimage})
             })
         }
-        else if (event.target.name === 'nextPerson') {
-            let currCount = this.state.counter
-            if (this.state.data === null || currCount >= this.state.data.length) 
-                return
-            this.setState({ 
-                customer_name: this.state.data[currCount]['customer_name'],
-                customer_street: this.state.data[currCount]['customer_street'],
-                customer_city: this.state.data[currCount]['customer_city'],
-                customer_state: this.state.data[currCount]['customer_state'],
-                customer_zip: this.state.data[currCount]['customer_zip'],
-            })
-            this.setState(prevState => ({counter : prevState.counter + 1}))
+        // else if (event.target.name === 'nextPerson') {
+        //     let currCount = this.state.counter
+        //     if (this.state.data === null || currCount >= this.state.data.length) 
+        //         return
+        //     this.setState({ 
+        //         customer_name: this.state.data[currCount]['customer_name'],
+        //         customer_street: this.state.data[currCount]['customer_street'],
+        //         customer_city: this.state.data[currCount]['customer_city'],
+        //         customer_state: this.state.data[currCount]['customer_state'],
+        //         customer_zip: this.state.data[currCount]['customer_zip'],
+        //     })
+        //     this.setState(prevState => ({counter : prevState.counter + 1}))
             
-        }
+        // }
         else if (event.target.name === "confirmButton") {
             // TODO:: send the correct address to back-end to insert into database
-            add(this.state.customer_name, this.state.customer_street, this.state.customer_city, this.state.customer_state, this.state.customer_zip);
+            console.log("confirmed: ", this.state.data[1])
+            add(this.state.data[1])
+            this.setState({displayTable:false})
         }
         else if (event.target.name === "runocr") {
             console.log('hello')
             if (this.state.uploadFile === null) {
-                console.log('ocr1')
+                console.log('OCR not triggered')
                 return
             }
-            console.log('ocr2 ' + this.state.uploadFile['name'])
+            console.log('OCR working: ' + this.state.uploadFile['name'])
             fetch('http://localhost:8000/?filename=' + this.state.uploadFile['name'])
             
             fetch('http://localhost:8000/')
@@ -98,8 +100,8 @@ class UploadPage extends React.Component {
                     // customer_state: data[0]['customer_state'],
                     // customer_zip: data[0]['customer_zip'],
                     data: data,
-                    counter : 1
-                }, () => add(this.state.data))
+                    displayTable : true
+                }, () => add(this.state.data[0]))
             })
             
             this.setState({uploadFile:null})
@@ -118,19 +120,19 @@ class UploadPage extends React.Component {
         let temp = this.state.data
         console.log(index, event.target.value, event.target.name)
         if (change === "customer_name") {
-            temp[index]['customer_name'] = event.target.value
+            temp[1][index]['customer_name'] = event.target.value
         }
         else if (change === "customer_street") {
-            temp[index]['customer_street'] = event.target.value
+            temp[1][index]['customer_street'] = event.target.value
         }
         else if (change === "customer_city") {
-            temp[index]['customer_city'] = event.target.value
+            temp[1][index]['customer_city'] = event.target.value
         }
         else if (change === "customer_state") {
-            temp[index]['customer_state'] = event.target.value
+            temp[1][index]['customer_state'] = event.target.value
         }
         else if (change === "customer_zip") {
-            temp[index]['customer_zip'] = event.target.value
+            temp[1][index]['customer_zip'] = event.target.value
         }  
         this.setState({data:temp}, () => console.log(this.state.data))
     }
@@ -141,7 +143,7 @@ class UploadPage extends React.Component {
                 <Grid item >
                     <NavBar onClick={this.handleClick} page="upload" ></NavBar>
                     <UtilBar onClick={this.handleClick} onChange={this.handleChange} page="upload"></UtilBar>
-                    <DataList handle={this.updateTable} data={this.state.data} display={this.state.displayTable} page="upload" ></DataList>
+                    <DataList click={this.handleClick} handle={this.updateTable} data={this.state.data} display={this.state.displayTable} page="upload" ></DataList>
                 </Grid>
             </Grid>
             
