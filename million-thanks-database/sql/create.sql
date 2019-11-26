@@ -53,3 +53,12 @@ COPY Letters (
 )
 FROM 'Letters.csv'
 WITH DELIMITER ',';
+
+------------
+----USER----
+------------
+CREATE USER db_admin WITH PASSWORD 'db_admin';
+GRANT CONNECT ON DATABASE "CPC_DB" TO db_admin;
+GRANT USAGE ON SCHEMA public TO db_admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO db_admin;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO db_admin;

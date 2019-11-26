@@ -1,6 +1,14 @@
+
+* {    
+    margin: 0;
+    padding: 0; 
+}
+
 body {
     background-color: white;
 }
+
+
 
 .header {
     background: darkgray;
@@ -12,12 +20,13 @@ body {
 .clickButton {
     background-color: #0550D5;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
     text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
+    font-size: 15px;  
+    border-radius: 5px;  
     border-color: #0550D5;
     border-style: solid;
+    
 }
 .clickButton:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
@@ -26,19 +35,13 @@ body {
 .notClickButton {
     background-color: #001f4d;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
     text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
+    font-size: 15px;  
+    border-radius: 5px;    
     border-color: #001f4d;
     border-style: solid;
-}
 
-.imagepos {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
 }
 
 
@@ -46,9 +49,36 @@ body {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+.utilButton {
+    background-color: #3EACD5;
+    color: white;
+    padding: 2px 2px;
+    text-align: center;
+    font-size: 10px;  
+    border-radius: 5px;  
+    border-color: #3EACD5;
+    border-style: solid;
+    margin:0;
+}
+
+
+
+.utilButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+.image {
+    display: block;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 .hide {
-    width: 0.1px;
-	height: 0.1px;
+    width: 0px;
+	height: 0px;
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
@@ -69,77 +99,11 @@ label {
     top: 2px;
 }
 
-.uploadbutton {
-    background-color: #3EACD5;
-    color: white;
-    padding: 5px 5px;
-    text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
-    border-color: #3EACD5;
-    border-style: solid;
-    position: relative;
-    top: 28px;
-    left: -259px;
-
-   
-}
-.confirmbutton {
-    background-color: #3EACD5;
-    color: white;
-    padding: 5px 5px;
-    text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
-    border-color: #3EACD5;
-    border-style: solid;
-    position: relative;
-    top:-135px;
-    left:870px;
-}
-.normalButton3 {
-    background-color: #3EACD5;
-    color: white;
-    padding: 5px 5px;
-    text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
-    border-color: #3EACD5;
-    border-style: solid;
-}
-.personbutton {
-    background-color: #3EACD5;
-    color: white;
-    padding: 5px 5px;
-    text-align: center;
-    font-size: 16px;  
-    border-radius: 10px;  
-    border-color: #3EACD5;
-    border-style: solid;
-    position: relative;
-    top:-135px;
-    left: -210px;
-
-}
-
-.dataget {
-height: 544px;
-width: 1080px;
-border-radius: 10px;
-position: relative;
-left: 330px;
-top:-125px;
-}
-
-.normalButton:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-}
 
 .textField {
     padding: 5px 12px;
     text-align: center;
     font-size: 12px;
-    border-radius: 30px;
     border: solid;
     position: relative;
     top: 5px;
@@ -147,9 +111,8 @@ top:-125px;
 }
 
 .textField2 {
-    padding: 5px 12px;
+    padding: 2px 2px;
     text-align: center;
     font-size: 12px;
     border-radius: 30px;
-    border: solid;
 }

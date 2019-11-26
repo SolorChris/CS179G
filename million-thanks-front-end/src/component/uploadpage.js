@@ -1,9 +1,20 @@
 import React from 'react'
 import '../index.css'
-import logo from './images/assets/banner_logo.png'
-import upbox from './images/assets/page_upload_button_drag_and_drop.png'
 import axios from 'axios'
 import {add} from './db_connect'
+import NavBar from './NavBar'
+import UtilBar from './UtilBar'
+import DataList from './DataList'
+import Grid from '@material-ui/core/Grid'
+
+
+const styles = {
+    grid: {
+        paddingLeft: 0,
+        paddingRight: 0
+    },
+};
+
 
 class UploadPage extends React.Component {
     constructor() {
@@ -16,19 +27,14 @@ class UploadPage extends React.Component {
             customer_zip : "",
             uploadFile: null,
             getimage: null,
-            display: null,
+            displayTable: false,
             count: 0,
             data: null
         }
 
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        function importAll (r) {
-            r.keys().forEach(r);
-          }
-          
-         // imgbrowse = importAll(require.context('this.state.display', false, /\.(png|jpe?g|svg)$/));
-        
+        this.updateTable = this.updateTable.bind(this)
     }
 
     handleClick(event) {
@@ -40,7 +46,7 @@ class UploadPage extends React.Component {
         }
         else if (event.target.name === 'uploadFile') {
             console.log(this.state.uploadFile)
-            console.log("heelo")
+            //console.log("heelo")
             const image = new FormData()
             image.append('file', this.state.uploadFile)
             
@@ -50,26 +56,9 @@ class UploadPage extends React.Component {
             .then(res => {
                 console.log(res.statusText)
                 console.log(this.state.getimage)
-                this.setState({uploadFile : null})
+                //this.setState({uploadFile : null})
                 this.setState({display : this.state.getimage})
             })
-            fetch('http://localhost:8000/?filename=' + this.state.uploadFile['name'])
-
-            /* comment out for debug
-            fetch('http://localhost:3300/')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                this.setState({ 
-                    customer_name: data['customer_name'],
-                    customer_street: data['customer_street'],
-                    customer_city: data['customer_city'],
-                    customer_state: data['customer_state'],
-                    customer_zip: data['customer_zip'],
-                    data: data,
-                    counter :0
-                })
-            })*/
         }
         else if (event.target.name === 'nextPerson') {
             let currCount = this.state.counter
@@ -89,6 +78,32 @@ class UploadPage extends React.Component {
             // TODO:: send the correct address to back-end to insert into database
             add(this.state.customer_name, this.state.customer_street, this.state.customer_city, this.state.customer_state, this.state.customer_zip);
         }
+        else if (event.target.name === "runocr") {
+            console.log('hello')
+            if (this.state.uploadFile === null) {
+                console.log('ocr1')
+                return
+            }
+            console.log('ocr2 ' + this.state.uploadFile['name'])
+            fetch('http://localhost:8000/?filename=' + this.state.uploadFile['name'])
+            
+            fetch('http://localhost:8000/')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                this.setState({ 
+                    customer_name: data[0]['customer_name'],
+                    customer_street: data[0]['customer_street'],
+                    customer_city: data[0]['customer_city'],
+                    customer_state: data[0]['customer_state'],
+                    customer_zip: data[0]['customer_zip'],
+                    data: data,
+                    counter : 1
+                })
+            })
+            
+            this.setState({uploadFile:null})
+        }
     }
 
     handleChange(event) {
@@ -96,53 +111,40 @@ class UploadPage extends React.Component {
         if (event.target.name === 'selectFile') {
             this.setState({uploadFile : event.target.files[0]})
             this.setState({getimage : URL.createObjectURL(event.target.files[0])})
-            // TODO:: Display image better and add a component so the user can say if they good
-        }
-        else {
-            const target = event.target;
-            const value = target.value;
-            const name = target.name;
-            this.setState({
-                [name]: value
-            });
-        }
+        }                             
     }
 
-    renderElement() {
-        if (this.state.display === null) {
-            return(<p></p>)
+    updateTable(event, index, change) {
+        let temp = this.state.data
+        console.log(index, event.target.value, event.target.name)
+        if (change === "customer_name") {
+            temp[index]['customer_name'] = event.target.value
         }
-        return(
-            <img src={this.state.display} height="920" width="920" alt="display of image upload"/>
-        )
+        else if (change === "customer_street") {
+            temp[index]['customer_street'] = event.target.value
+        }
+        else if (change === "customer_city") {
+            temp[index]['customer_city'] = event.target.value
+        }
+        else if (change === "customer_state") {
+            temp[index]['customer_state'] = event.target.value
+        }
+        else if (change === "customer_zip") {
+            temp[index]['customer_zip'] = event.target.value
+        }  
+        this.setState({data:temp}, () => console.log(this.state.data))
     }
 
     render() {
         return(
-            <div>
-                <div className="header">
-                    <img src={logo} alt={"million thanks"} height="70" width="150"/>
-                    <button name= "uploadButton" type="button" className="clickButton" onClick={this.handleClick}>upload</button>
-                    <button name= "searchButton" type="button" className="notClickButton" onClick={this.handleClick}>search</button>
-                    <button name= "mapButton" type="button" className="notClickButton" onClick={this.handleClick}>analytic map</button>
-                </div>
-                <input name= "selectFile" type="file" className="hide" id="doupload" onChange={this.handleChange}/>
-                <label for="doupload"><img src={upbox} alt={"upload icon"} className="upstyle" height="157" width="259" /></label>
-                
-                <button name= "uploadFile" className="uploadbutton" type="button" onClick={this.handleClick}>upload selected file</button>
-                <button name= "confirmButton" className="confirmbutton" type="button" onClick={this.handleClick} >confirm address</button>
-                <button name= "nextPerson" className="personbutton" type="button" onClick={this.handleClick} >Next Person</button>
-                <div className="dataget">
-                <form>
-                    <input type="text" name="customer_name" className="textField" placeholder="name" value={this.state.customer_name} onChange={this.handleChange}></input>
-                    <input type="text" name="customer_street" className="textField" placeholder="street" value={this.state.customer_street} onChange={this.handleChange}></input>
-                    <input type="text" name="customer_city" className="textField" placeholder="city" value={this.state.customer_city} onChange={this.handleChange}></input>
-                    <input type="text" name="customer_state" className="textField" placeholder="state" value={this.state.customer_state} onChange={this.handleChange}></input>
-                    <input type="text" name="customer_zip" className="textField" placeholder="zip" value={this.state.customer_zip} onChange={this.handleChange}></input>
-                </form>
-                {this.renderElement()}
-                </div>
-            </div>
+            <Grid container style={styles.grid} direction="column" alignItems="stretch">
+                <Grid item >
+                    <NavBar onClick={this.handleClick} page="upload" ></NavBar>
+                    <UtilBar onClick={this.handleClick} onChange={this.handleChange} page="upload"></UtilBar>
+                    <DataList handle={this.updateTable} data={this.state.data} display={this.state.displayTable} page="upload" ></DataList>
+                </Grid>
+            </Grid>
+            
         )
     }
 }

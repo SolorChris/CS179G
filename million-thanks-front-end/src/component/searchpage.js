@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../index.css'
-import logo from './logo.png' 
-import {makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper }from '@material-ui/core'
-import { Checkbox, Tab } from '@material-ui/core'
-//import {addCustomer, search} from './db_connect'
-import { unwatchFile } from 'fs'
-import { inspect } from 'util'
+import NavBar from './NavBar'
+import UtilBar from './UtilBar'
+import DataList from './DataList'
+
+const hostIP = "10.42.0.1"
+
 
 class SearchPage extends React.Component {
     constructor() {
@@ -35,23 +35,12 @@ class SearchPage extends React.Component {
             this.props.history.push('/')
         }
         else if (event.target.name === "mapButton") {
-            //this.props.history.goBack()
             this.props.history.push('/analyticmap')
         }
         else if (event.target.name === "submitButton") {
-            // TODO:: write query and send it to backend to run it on database
-            /*
-             if (this.state.filter === "name") {
-                 console.log("hello")
-                 let addr = [{'customer_name':'me','customer_street_1':'123 hello','customer_city':'riverside','customer_state':'CA','customer_zip':'11111'},
-                         {'customer_name':'me','customer_street_1':'321 world','cutumer_city':'anaheim','customer_state':'CA','customer_zip':'22222'}]
-                 this.setState({addresses:addr})
-                 this.setState({displayTable:true})
-            }
-            */
             this.setState({displayTable : false})
             if(this.state.searchText) {
-                return fetch("http://localhost:3200/search?text=" + this.state.searchText + "&filter=" + this.state.filter)
+                return fetch("http://" + hostIP + ":3200/search?text=" + this.state.searchText + "&filter=" + this.state.filter)
                 .then(response => response.json())
                 .then(data => {
                     this.setState({ addresses: data,
@@ -73,81 +62,13 @@ class SearchPage extends React.Component {
         });
     }
     
-    renderElement() {
-        // TODO:: get the data from database and implement the table
-        const classes = makeStyles(theme => ({
-            root: {
-            width: '100%',
-            marginTop: theme.spacing(3),
-            overflowX: 'auto',
-            },
-            table: {
-            minWidth: 650,
-            },
-        }))
-        console.log(this.state.addresses)
-        if (this.state.displayTable === true) {
-            return (
-            <div>
-                <Paper className={classes.root}>
-                <Table className={classes.table}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Street</TableCell>
-                        <TableCell align="right">City</TableCell>
-                        <TableCell align="right">State</TableCell>
-                        <TableCell align="right">Zip</TableCell>
-                        <TableCell align="right">Select</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {this.state.addresses.map(row => (
-                    <TableRow key={row.customer_name}>
-                        <TableCell component="th" scope="row">{row.customer_name}</TableCell>
-                        <TableCell align="right">{row.customer_street_1}</TableCell>
-                        <TableCell align="right">{row.customer_city}</TableCell>
-                        <TableCell align="right">{row.customer_state}</TableCell>
-                        <TableCell align="right">{row.customer_zip}</TableCell>
-                        <TableCell align="right">
-                            <Checkbox
-                                onChange={e => this.handleSelect(e, row)}
-                            />
-                        </TableCell>
-                    </TableRow>
-                    ))}
-                </TableBody>
-                </Table>
-                </Paper>
-                <button name= "submitAddress" type="button" className="normalButton3" onClick={this.handleClick}>Generate Letter</button>
-            </div>
-            )
-        }
-        return(<p></p>)
-    }
 
     render() {
         return(
             <div>
-                <div className="header">
-                    <img src={logo} alt={"million thanks"} height="70" width="150"/>
-                    <button name= "uploadButton" type="button" className="notClickButton" onClick={this.handleClick}>upload</button>
-                    <button name= "searchButton" type="button" className="clickButton" onClick={this.handleClick}>search</button>
-                    <button name= "mapButton" type="button" className="notClickButton" onClick={this.handleClick}>analytic map</button>
-                </div>
-                <input type="text" name="searchText" className="textField2" placeholder="enter address" onChange={this.handleChange} value={this.state.searchText}></input>
-                <select name="filter" onChange={this.handleChange} >
-                    <option value="name">name</option>
-                    <option value="street">street</option>
-                    <option value="city">city</option>
-                    <option value="state">state</option>
-                    <option value="zip">zip</option>
-                </select>
-                <button name= "submitButton" type="button" className="normalButton3" onClick={this.handleClick}>submit</button>
-                <div>
-                    {this.renderElement()}
-                </div>
-
+                <NavBar onClick={this.handleClick} page="search" ></NavBar>
+                <UtilBar onChange={this.handleChange} onClick={this.handleClick} page="search" ></UtilBar>
+                <DataList handle={this.handleSelect} data={this.state.addresses} display={this.state.displayTable} page="search" ></DataList>
             </div>
         )
     }
