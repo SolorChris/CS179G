@@ -89,6 +89,10 @@ def runocr(files):
     jsonarray = []
     jsonarrayreview = []
     jsonarraynoreview = []
+    filecount = 0
+    for filename in os.listdir("uploadimage"):
+        if filename.lower().endswith(".jpg"):
+            filecount += 1
     for filename in os.listdir("uploadimage"):
         if filename.lower().endswith(".jpg"):
             (output,boolean) = detect_document("uploadimage/" + filename)
