@@ -17,6 +17,7 @@ geolocator = Nominatim()
 
 def detect_document(path):
     returnstring = ""
+    reviewBool = False
     """Detects document features in an image."""
     from google.cloud import vision
     import io
