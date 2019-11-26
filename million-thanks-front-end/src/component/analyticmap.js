@@ -33,11 +33,15 @@ class AnalyticMap extends React.Component {
 
     componentWillMount() {
         // initialize data
-        let d = [{'key':1, 'address': '123 somewhere', 'latitude':43.142, 'longitude':-85.049}, 
-                 {'key':2, 'address': '234 I dont know', 'latitude':45.255, 'longitude':-93.287},
-                 {'key':3, 'address': '345 no idea', 'latitude':33.718, 'longitude':-83.801},]
-
-        this.setState({data:d})//, () => console.log(this.state.data))
+        fetch("http://localhost:3200/analyticmap?run=yes")
+        .then(response => response.json())
+                .then(result => {
+                    for (let i = 0; i < result.length; ++i) {
+                        result[i]['customer_latitude'] = parseFloat(result[i]['customer_latitude'])
+                        result[i]['customer_longitude'] = parseFloat(result[i]['customer_longitude'])
+                    }
+                    this.setState({data:result})//, () => console.log("map: ", this.state.data))
+                })
     }
 
     handleClick(event) {
@@ -59,37 +63,41 @@ class AnalyticMap extends React.Component {
     }
 
     render() {
-        return(
-            <div>
-                <NavBar onClick={this.handleClick} page="analytic" ></NavBar>
-                <UtilBar page="analytic" ></UtilBar>
-                
+        if (this.state.data != null) {
+            return(
                 <div>
-                    <ReactMapGL 
-                        {...this.state.viewport} 
-                        mapboxApiAccessToken={MAPBOX_TOKEN}
-                        onViewportChange = {viewport => {this.viewChange(viewport)}}
-                    >
-                        {this.state.data.map(coords => (
-                            <Marker
-                                key={coords['key']}
-                                latitude={coords['latitude']}
-                                longitude={coords['longitude']}
-                            >
-                                <div>
-                                    <form name="locationButton" onClick={e => this.handleButton(e, coords)}>
-                                        <input type="image" src={mapMarker} height="25" width="25" alt="user address"/>
-                                    </form>
-                                </div>
-                            </Marker>
-                        ))}
+                    <NavBar onClick={this.handleClick} page="analytic" ></NavBar>
+                    <UtilBar page="analytic" ></UtilBar>
+                    
+                    <div>
+                        <ReactMapGL 
+                            {...this.state.viewport} 
+                            mapboxApiAccessToken={MAPBOX_TOKEN}
+                            onViewportChange = {viewport => {this.viewChange(viewport)}}
+                        >
+                            {this.state.data.map((coords, i) => (
+                                <Marker
+                                    key={i}
+                                    latitude={coords['customer_latitude']}
+                                    longitude={coords['customer_longitude']}
+                                >
+                                    <div>
+                                        <form name="locationButton" onClick={e => this.handleButton(e, coords)}>
+                                            <input type="image" src={mapMarker} height="25" width="25" alt="user address"/>
+                                        </form>
+                                    </div>
+                                </Marker>
+                            ))}
 
-                    </ReactMapGL>
+                        </ReactMapGL>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        else {
+            return (<p></p>)
+        }
     }
-
 }
 
 export default AnalyticMap

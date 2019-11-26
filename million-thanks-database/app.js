@@ -73,7 +73,8 @@ app.get('/removeCustomer', function(req, res){
   
 });
 
-app.get('/analyticMap', function(req, resp){
+/*
+app.get('/analyticmap', function(req, resp){
   const {dayL, dayR, monthL, monthR, yearL, yearR} = req.query
   console.log("Searching for letter submissions");
 
@@ -93,7 +94,26 @@ app.get('/analyticMap', function(req, resp){
   });
   
 });
-  
+*/
+app.get('/analyticmap', function(req, resp){
+  const {run} = req.query
+  console.log("Searching for letter submissions ");
+
+  if (run === 'yes') {
+    console.log("yes")
+    sql = 'SELECT customer_longitude, customer_latitude FROM Customers;'
+    client.query(sql, (err, result) => {
+        if (err) 
+          throw err
+        //finalResult = resp.json(result)
+        console.log("final result: ", result.rows)
+        //resp.send(result.rows);
+        resp.send(result.rows);
+      })
+  }
+ });
+
+
 
 app.get('/search', function(req, resp){
   const {text, filter} = req.query
