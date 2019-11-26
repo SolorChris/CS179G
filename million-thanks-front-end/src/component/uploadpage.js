@@ -92,14 +92,14 @@ class UploadPage extends React.Component {
             .then(data => {
                 console.log(data)
                 this.setState({ 
-                    customer_name: data[0]['customer_name'],
-                    customer_street: data[0]['customer_street'],
-                    customer_city: data[0]['customer_city'],
-                    customer_state: data[0]['customer_state'],
-                    customer_zip: data[0]['customer_zip'],
+                    // customer_name: data[0]['customer_name'],
+                    // customer_street: data[0]['customer_street'],
+                    // customer_city: data[0]['customer_city'],
+                    // customer_state: data[0]['customer_state'],
+                    // customer_zip: data[0]['customer_zip'],
                     data: data,
                     counter : 1
-                })
+                }, () => add(this.state.data))
             })
             
             this.setState({uploadFile:null})

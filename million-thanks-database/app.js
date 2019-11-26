@@ -19,33 +19,42 @@ client.connect();
 
 
 
-app.get('/addcustomer', function(req, res){
-  const {name, street, city, state, zip} = req.query
-  client.query('SELECT COUNT(customer_id) FROM Customers WHERE '
-                + 'customer_name=\'' + name + '\' '
-                + 'AND customer_street_1=\'' + street + '\''
-                + 'AND customer_city=\'' + city + '\''
-                + 'AND customer_state=\'' + state + '\''
-                + 'AND customer_zip=\'' + zip + '\'', (err, res) => {
-      if (err) throw err
-      let count = res.rows[0].count
-      if(count < 1) { //prevents adding a customer that is the same as one that exists
-        client.query('SELECT MAX(customer_id) FROM Customers;', (err, res) => {
-          if (err) throw err
-           var nextId = parseInt(res.rows[0].max) + 1
-           console.log(nextId)
-           console.log("Adding:", nextId, name, street, city, state, zip);
+// app.get('/addcustomer', function(req, res){
+//   const {name, street, city, state, zip} = req.query
+//   client.query('SELECT COUNT(customer_id) FROM Customers WHERE '
+//                 + 'customer_name=\'' + name + '\' '
+//                 + 'AND customer_street_1=\'' + street + '\''
+//                 + 'AND customer_city=\'' + city + '\''
+//                 + 'AND customer_state=\'' + state + '\''
+//                 + 'AND customer_zip=\'' + zip + '\'', (err, res) => {
+//       if (err) throw err
+//       let count = res.rows[0].count
+//       if(count < 1) { //prevents adding a customer that is the same as one that exists
+//         client.query('SELECT MAX(customer_id) FROM Customers;', (err, res) => {
+//           if (err) throw err
+//            var nextId = parseInt(res.rows[0].max) + 1
+//            console.log(nextId)
+//            console.log("Adding:", nextId, name, street, city, state, zip);
      
-           client.query('INSERT INTO Customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip) '
-                     + 'VALUES (\'' + nextId + "\', \'" + name + "\', \'" + street + "\', \'" + "_" + "\', \'" + city + "\', \'"
-                     + state + "\', \'" + zip + '\');', (err, res) => {
-           if (err) throw err
-           })
-        })
-      }
-  })
+//            client.query('INSERT INTO Customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip) '
+//                      + 'VALUES (\'' + nextId + "\', \'" + name + "\', \'" + street + "\', \'" + "_" + "\', \'" + city + "\', \'"
+//                      + state + "\', \'" + zip + '\');', (err, res) => {
+//            if (err) throw err
+//            })
+//         })
+//       }
+//   })
   
   
+// });
+
+app.get('/addcustomer', function(req, res){
+  const {name, street, city, state, zip, longitude, latitude} = req.query
+  nextId = Math.floor(Math.random() * 100) + 15
+  client.query('INSERT INTO Customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip, customer_longitude, customer_latitude) '
+  + 'VALUES (\'' + nextId + '\', \'' + name + '\', \'' + street + '\',\'' + '_' + '\', \''  + city + '\', \''
+  + state + '\', \'' + zip +  '\', \'' + longitude +   '\', \'' + latitude + '\');', (err, res) => {
+  if (err) throw err})
 });
 
 app.get('/removeCustomer', function(req, res){

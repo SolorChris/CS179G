@@ -14,6 +14,8 @@ CREATE TABLE Customers
 	customer_city CHAR(32) NOT NULL,
 	customer_state CHAR(32) NOT NULL,
 	customer_zip CHAR(32) NOT NULL,
+	customer_latitude CHAR(32) NOT NULL,
+	customer_longitude CHAR(32) NOT NULL,
 	PRIMARY KEY (customer_id)
 );
 
