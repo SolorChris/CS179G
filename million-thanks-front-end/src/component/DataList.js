@@ -96,7 +96,6 @@ export const DataList = ({click, handle, data, display, page}) => {
                             <TableCell align="right">City</TableCell>
                             <TableCell align="right">State</TableCell>
                             <TableCell align="right">Zip</TableCell>
-                            <TableCell align="right">Select</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -107,9 +106,6 @@ export const DataList = ({click, handle, data, display, page}) => {
                             <TableCell align="right">{row.customer_city}</TableCell>
                             <TableCell align="right">{row.customer_state}</TableCell>
                             <TableCell align="right">{row.customer_zip}</TableCell>
-                            <TableCell align="right">
-                                <Checkbox onChange={e => handle(e, row)}/>
-                            </TableCell>
                         </TableRow>
                         ))}
                     </TableBody>
