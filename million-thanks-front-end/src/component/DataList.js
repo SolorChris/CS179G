@@ -1,7 +1,7 @@
 import React from 'react'
 import { Checkbox} from '@material-ui/core'
 import {makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper, TextField}from '@material-ui/core'
-
+import '../index.css'
 
 
 
@@ -33,6 +33,7 @@ export const DataList = ({click, handle, data, display, page}) => {
                                 <TableCell align="right">City</TableCell>
                                 <TableCell align="right">State</TableCell>
                                 <TableCell align="right">Zip</TableCell>
+                                <TableCell align="right">File Name</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -53,12 +54,13 @@ export const DataList = ({click, handle, data, display, page}) => {
                                 <TableCell align="right">
                                     <TextField value={row.customer_zip} onChange={e => handle(e, i, "customer_zip")}/>
                                 </TableCell>
+                                <TableCell align="right">{row.file_name}</TableCell>
                             </TableRow>
                             ))}
                         </TableBody>
                         </Table>
                         </Paper>
-                        <button name= "confirmButton" className="normalButton" type="button" onClick={click} >confirm</button>
+                        <button name= "confirmButton" className="clickButton" type="button" onClick={click} >confirm</button>
                     </div>
                 )
             }
@@ -74,6 +76,7 @@ export const DataList = ({click, handle, data, display, page}) => {
                                 <TableCell align="right">City</TableCell>
                                 <TableCell align="right">State</TableCell>
                                 <TableCell align="right">Zip</TableCell>
+                                <TableCell align="right">File Name</TableCell>
                             </TableRow>
                         </TableHead>
                         </Table>
