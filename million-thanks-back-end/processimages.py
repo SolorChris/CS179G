@@ -107,20 +107,43 @@ def runocr(files):
             # print(parsedaddress)  
             # print(parsedaddress[0])
             # print(parsedaddress[0]['Recipient'])
-            name = parsedaddress[0]['Recipient']
+            if parsedaddress[0]['Recipient']:
+                name = parsedaddress[0]['Recipient']
+            else:
+                name = ""
             # print(parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType'])
             # address = parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']
-            streetnumber = parsedaddress[0]['AddressNumber']
-            address = parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']        
+            if parsedaddress[0]['AddressNumber']:
+                streetnumber = parsedaddress[0]['AddressNumber']
+            else:
+                streetnumber = ""
+
+            if parsedaddress[0]['StreetName']:
+                if parsedaddress[0]['StreetNamePostType']:
+                    address = parsedaddress[0]['StreetName'] + " " + parsedaddress[0]['StreetNamePostType']    
+                else:
+                    address = parsedaddress[0]['StreetName']
+            else:
+                address = parsedaddress[0]['StreetNamePostType'] 
+            
             # print(parsedaddress[0]['PlaceName'])
-            city = parsedaddress[0]['PlaceName']
+            if parsedaddress[0]['PlaceName']:
+                city = parsedaddress[0]['PlaceName']
+            else:
+                city = ""
             # print(parsedaddress[0]['StateName'])
-            state = parsedaddress[0]['StateName']
+            if parsedaddress[0]['StateName']:
+                state = parsedaddress[0]['StateName']
+            else:
+                state = ""
             # print(parsedaddress[0]['ZipCode'])
-            zip = parsedaddress[0]['ZipCode']
+            if parsedaddress[0]['ZipCode']:
+                zip = parsedaddress[0]['ZipCode']
+            else:
+                zip = ""
             customer_street = streetnumber + " " + address
 
-            fulladdress = customer_street +" " + city + " " + state + " " + zip
+            fulladdress = customer_street + " " + city + " " + state + " " + zip
 
             location = geolocator.geocode(fulladdress)
 
@@ -135,6 +158,7 @@ def runocr(files):
             # data['city'] = city
             # data['state'] = state
             # data['zip'] = zip
+            data['file_name'] = filename
             data['customer_name'] = name
             data['customer_street'] = customer_street
             data['customer_city'] = city
