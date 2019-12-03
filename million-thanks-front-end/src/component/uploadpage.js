@@ -100,8 +100,14 @@ class UploadPage extends React.Component {
                     // customer_state: data[0]['customer_state'],
                     // customer_zip: data[0]['customer_zip'],
                     data: data,
-                    displayTable : true
-                }, () => add(this.state.data[0]))
+                }, () => {
+                            if (this.state.data[0].length > 0) {
+                                add(this.state.data[0])
+                            }
+                            if (this.state.data[1].length > 0) {
+                                this.setState({displayTable : true})
+                            }
+                        })
             })
             
             this.setState({uploadFile:null})
