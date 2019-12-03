@@ -2,7 +2,6 @@
 
 
 
-const hostIP = '10.42.0.1'
 
 var express = require('express'),
     pg = require('pg'),
@@ -50,9 +49,9 @@ client.connect();
 
 app.get('/addcustomer', function(req, res){
   const {name, street, city, state, zip, longitude, latitude} = req.query
-  nextId = Math.floor(Math.random() * 100) + 15
-  client.query('INSERT INTO Customers (customer_id, customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip, customer_longitude, customer_latitude) '
-  + 'VALUES (\'' + nextId + '\', \'' + name + '\', \'' + street + '\',\'' + '_' + '\', \''  + city + '\', \''
+  // nextId = Math.floor(Math.random() * 100) + 15 \'' + nextId 
+  client.query('INSERT INTO Customers (customer_name, customer_street_1, customer_street_2, customer_city, customer_state, customer_zip, customer_longitude, customer_latitude) '
+  + 'VALUES (\'' + name + '\', \'' + street + '\',\'' + '_' + '\', \''  + city + '\', \''
   + state + '\', \'' + zip +  '\', \'' + longitude +   '\', \'' + latitude + '\');', (err, res) => {
   if (err) throw err})
 });
@@ -117,14 +116,14 @@ app.get('/analyticmap', function(req, resp){
 
 app.get('/search', function(req, resp){
   const {text, filter} = req.query
-  let ip = req.connection.remoteAddress;
-  ip = ip.replace('::', '/')
-  ip = ip.replace('ffff:', '/')
+  // let ip = req.connection.remoteAddress;
+  // ip = ip.replace('::', '/')
+  // ip = ip.replace('ffff:', '/')
 
-  if(ip === '//'+hostIP)
-    ip = 'localhost'
-  else
-    ip = hostIP
+  // if(ip === '//'+hostIP)
+  //   ip = 'localhost'
+  // else
+  //   ip = hostIP
 
   var column = 'column'
   var table = 'table'
@@ -159,7 +158,7 @@ app.get('/search', function(req, resp){
   client.query('SELECT * FROM ' + table + ' WHERE position(\'' + text + '\' in ' + column + ') > 0;', (err, res) => {
     if (err) throw err
     console.log(res.rows);
-    resp.setHeader('Access-Control-Allow-Origin', 'http://'+ ip + ':3000' );
+    resp.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000' );
     resp.send(res.rows);
   });
   

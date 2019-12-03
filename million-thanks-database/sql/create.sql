@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS Letters CASCADE;--OK
 ------------
 CREATE TABLE Customers
 (
-	customer_id INTEGER NOT NULL,
+	customer_id SERIAL NOT NULL,
 	customer_name CHAR(32) NOT NULL,
 	customer_street_1 CHAR(32) NOT NULL,
 	customer_street_2 CHAR(32),
@@ -64,3 +64,4 @@ GRANT CONNECT ON DATABASE "CPC_DB" TO db_admin;
 GRANT USAGE ON SCHEMA public TO db_admin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO db_admin;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO db_admin;
+GRANT USAGE, SELECT ON SEQUENCE customers_customer_id_seq to db_admin;
