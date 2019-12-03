@@ -8,12 +8,12 @@ from processimages import deleteimages
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/", methods=['GET','POST'])
+@app.route("/", methods=['GET'])
 def hello():
     filename=request.args.get('filename')
     # data = []
     data = runocr(filename)
-    deleteimages()
+    # deleteimages()
     print(filename, file=sys.stdout)
     print(data, file=sys.stdout)
     return data

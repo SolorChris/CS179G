@@ -105,21 +105,21 @@ def runocr(files):
 
             parsedaddress = usaddress.tag(output)
             # print(parsedaddress)  
-            # print(parsedaddress[0])
+            print(parsedaddress[0])
             # print(parsedaddress[0]['Recipient'])
-            if parsedaddress[0]['Recipient']:
+            if 'Recipient' in  parsedaddress[0]:
                 name = parsedaddress[0]['Recipient']
             else:
                 name = ""
             # print(parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType'])
             # address = parsedaddress[0]['StreetNamePreDirectional'] + " " +  parsedaddress[0]['StreetName'] + " " +parsedaddress[0]['StreetNamePostType']
-            if parsedaddress[0]['AddressNumber']:
+            if 'AddressNumber' in parsedaddress[0]:
                 streetnumber = parsedaddress[0]['AddressNumber']
             else:
                 streetnumber = ""
 
-            if parsedaddress[0]['StreetName']:
-                if parsedaddress[0]['StreetNamePostType']:
+            if 'StreetName' in parsedaddress[0]:
+                if 'StreetNamePostType' in parsedaddress[0]:
                     address = parsedaddress[0]['StreetName'] + " " + parsedaddress[0]['StreetNamePostType']    
                 else:
                     address = parsedaddress[0]['StreetName']
@@ -127,17 +127,17 @@ def runocr(files):
                 address = parsedaddress[0]['StreetNamePostType'] 
             
             # print(parsedaddress[0]['PlaceName'])
-            if parsedaddress[0]['PlaceName']:
+            if 'PlaceName' in parsedaddress[0]:
                 city = parsedaddress[0]['PlaceName']
             else:
                 city = ""
             # print(parsedaddress[0]['StateName'])
-            if parsedaddress[0]['StateName']:
+            if 'StateName' in parsedaddress[0]:
                 state = parsedaddress[0]['StateName']
             else:
                 state = ""
             # print(parsedaddress[0]['ZipCode'])
-            if parsedaddress[0]['ZipCode']:
+            if 'ZipCode' in parsedaddress[0]:
                 zip = parsedaddress[0]['ZipCode']
             else:
                 zip = ""
@@ -147,16 +147,13 @@ def runocr(files):
 
             
             location = geolocator.geocode(fulladdress)
-            if location.longitude:
+
+            if location:
                 longitude = location.longitude
+                latitude = location.latitude
             else:
                 longitude = ""
-                
-            if location.latitude:
-                latitude = location.latitude
-            else: 
                 latitude = ""
-
 
             
             data = {}
@@ -199,6 +196,7 @@ def deleteimages():
     filelist = [ f for f in os.listdir('uploadimage') if f.endswith(".zip") ]
     for f in filelist:
         os.remove(os.path.join('uploadimage', f))
+
 '''
 print(json_data)
 @app.route('/')
