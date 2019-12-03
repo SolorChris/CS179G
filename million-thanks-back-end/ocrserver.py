@@ -10,6 +10,7 @@ CORS(app)
 @app.route("/", methods=['GET','POST'])
 def hello():
     filename=request.args.get('filename')
+    # data = []
     data = runocr(filename)
     print(filename, file=sys.stdout)
     print(data, file=sys.stdout)

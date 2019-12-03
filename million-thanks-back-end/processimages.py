@@ -147,11 +147,14 @@ def runocr(files):
 
             
             location = geolocator.geocode(fulladdress)
-            if location:
+            if location.longitude:
                 longitude = location.longitude
+            else:
+                longitude = ""
+                
+            if location.latitude:
                 latitude = location.latitude
             else: 
-                longitude = ""
                 latitude = ""
 
 
