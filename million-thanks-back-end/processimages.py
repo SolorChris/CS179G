@@ -145,13 +145,14 @@ def runocr(files):
 
             fulladdress = customer_street + " " + city + " " + state + " " + zip
 
+            
+            location = geolocator.geocode(fulladdress)
             if location:
-                location = geolocator.geocode(fulladdress)
                 longitude = location.longitude
                 latitude = location.latitude
             else: 
-                longitude = "N/A"
-                latitude = "N/A"
+                longitude = ""
+                latitude = ""
 
 
             
