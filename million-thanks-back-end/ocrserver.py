@@ -4,6 +4,7 @@ from flask import jsonify
 import sys
 from flask_cors import CORS
 from processimages import runocr
+from processimages import deleteimages
 app = Flask(__name__)
 CORS(app)
 
@@ -12,6 +13,7 @@ def hello():
     filename=request.args.get('filename')
     # data = []
     data = runocr(filename)
+    deleteimages()
     print(filename, file=sys.stdout)
     print(data, file=sys.stdout)
     return data

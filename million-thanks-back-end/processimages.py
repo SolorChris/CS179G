@@ -192,6 +192,13 @@ def runocr(files):
     return json.dumps(jsonarray)
     # return jsonarray
 
+def deleteimages():
+    filelist = [ f for f in os.listdir('uploadimage') if f.lower().endswith(".jpg") ]
+    for f in filelist:
+        os.remove(os.path.join('uploadimage', f))
+    filelist = [ f for f in os.listdir('uploadimage') if f.endswith(".zip") ]
+    for f in filelist:
+        os.remove(os.path.join('uploadimage', f))
 '''
 print(json_data)
 @app.route('/')
