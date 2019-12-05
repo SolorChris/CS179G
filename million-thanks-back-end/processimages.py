@@ -8,12 +8,15 @@ from flask import jsonify
 from flask_cors import CORS
 import flask
 import os
+import shutil
 from geopy.geocoders import Nominatim
 
 app = Flask(__name__)
 CORS(app)
 
 geolocator = Nominatim()
+getcur = os.getcwd()
+getbelow = os.path.split(getcur)[0]
 
 def detect_document(path):
     returnstring = ""
@@ -74,8 +77,10 @@ def runocr(files):
     # extract any .zip files in the uploadimage directory
     for filename in os.listdir("uploadimage"):
         if filename.lower().endswith(".zip"):
-            with zipfile.ZipFile("uploadimage\\"+filename, 'r') as zip_ref:
-                zip_ref.extractall("uploadimage")
+            with open ("uploadimage\\"+filename):
+                with zipfile.ZipFile("uploadimage\\"+filename, 'r') as zip_ref:
+                    zip_ref.extractall("uploadimage")
+            os.remove("uploadimage\\"+filename)
 
     #perform ocr on any jpg in uploadimage
     # imgcount = 1
@@ -124,7 +129,7 @@ def runocr(files):
                 else:
                     address = parsedaddress[0]['StreetName']
             else:
-                address = parsedaddress[0]['StreetNamePostType'] 
+                address = ""
             
             # print(parsedaddress[0]['PlaceName'])
             if 'PlaceName' in parsedaddress[0]:
@@ -175,6 +180,7 @@ def runocr(files):
                 jsonarrayreview.append(data)
             else:
                 jsonarraynoreview.append(data)
+            shutil.move("uploadimage\\"+filename, getbelow +"\million-thanks-front-end\src\component\storage" )
             # jsonarray.append(data)
             
 

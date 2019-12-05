@@ -10,6 +10,8 @@ export const DataList = ({click, handle, data, display, page}) => {
     const classes = makeStyles(theme => ({
         root: {
         width: '100%',
+        displayimg: false,
+        getimg: null,
         marginTop: theme.spacing(3),
         overflowX: 'auto',
         },
@@ -61,9 +63,19 @@ export const DataList = ({click, handle, data, display, page}) => {
                         </Table>
                         </Paper>
                         <button name= "confirmButton" className="clickButton" type="button" onClick={click} >confirm</button>
+                        handleCellClick(data.i.row.file_name , event)
+                      {
+                            <img src={'.storage/'+data.i.row.file_name } height="920" width="920"/>
+                        } 
+                    {/*  handleCellClick(row.file_name ,i,event)
+                      {
+                            <img src={'.storage/'+row.file_name } height="920" width="920"/>
+                        }*/ }
+                        
                     </div>
                 )
             }
+            //getimg = {row.file_name}
             else {
                 return(
                     <div>
