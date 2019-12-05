@@ -180,7 +180,8 @@ def runocr(files):
                 jsonarrayreview.append(data)
             else:
                 jsonarraynoreview.append(data)
-            shutil.move("uploadimage\\"+filename, getbelow +"\million-thanks-front-end\src\component\storage" )
+            #shutil.move("uploadimage\\"+filename, getbelow +"\million-thanks-front-end\src\component\storage",copy_function = shutil.copytree )
+            shutil.copy(os.path.join("uploadimage\\", filename), os.path.join(getbelow +"\million-thanks-front-end\src\component\storage\\", filename))
             # jsonarray.append(data)
             
 

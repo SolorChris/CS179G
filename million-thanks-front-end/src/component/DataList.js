@@ -4,14 +4,12 @@ import {makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper, Tex
 import '../index.css'
 
 
-
+var getimg
 
 export const DataList = ({click, handle, data, display, page}) => {
     const classes = makeStyles(theme => ({
         root: {
         width: '100%',
-        displayimg: false,
-        getimg: null,
         marginTop: theme.spacing(3),
         overflowX: 'auto',
         },
@@ -56,22 +54,14 @@ export const DataList = ({click, handle, data, display, page}) => {
                                 <TableCell align="right">
                                     <TextField value={row.customer_zip} onChange={e => handle(e, i, "customer_zip")}/>
                                 </TableCell>
-                                <TableCell align="right">{row.file_name}</TableCell>
+                                <TableCell align="right" onClick={getimg= row.file_name}>{row.file_name}</TableCell>
                             </TableRow>
                             ))}
                         </TableBody>
                         </Table>
                         </Paper>
                         <button name= "confirmButton" className="clickButton" type="button" onClick={click} >confirm</button>
-                        handleCellClick(data.i.row.file_name , event)
-                      {
-                            <img src={'.storage/'+data.i.row.file_name } height="920" width="920"/>
-                        } 
-                    {/*  handleCellClick(row.file_name ,i,event)
-                      {
-                            <img src={'.storage/'+row.file_name } height="920" width="920"/>
-                        }*/ }
-                        
+                        <img src={"/storage/"+getimg} height="920" width="920" alt="display of image upload"/>
                     </div>
                 )
             }

@@ -78,12 +78,7 @@ class UploadPage extends React.Component {
             // TODO:: send the correct address to back-end to insert into database
             console.log("confirmed: ", this.state.data[1])
             add(this.state.data[1])
-            let currCount = this.state.counter
-            if (this.state.data === null || currCount >= this.state.data.length) 
-                 return
-            this.setState({displayTable:true})
-            this.setState(prevState => ({counter : prevState.counter + 1}))
-            //this.setState({displayTable:false})
+            this.setState({displayTable:false})
         }
         else if (event.target.name === "runocr") {
             console.log('hello')
@@ -105,16 +100,15 @@ class UploadPage extends React.Component {
                     // customer_state: data[0]['customer_state'],
                     // customer_zip: data[0]['customer_zip'],
                     data: data,
-                    counter:1
                 }, 
-                //() => {
-                  //          if (this.state.data[0].length > 0) {
-                    //            add(this.state.data[0])
-                      //      }
-                        //    if (this.state.data[1].length > 0) {
-                            //    this.setState({displayTable : true})
-                          //  }
-                    //    }
+                () => {
+                            if (this.state.data[0].length > 0) {
+                                add(this.state.data[0])
+                            }
+                            if (this.state.data[1].length > 0) {
+                                this.setState({displayTable : true})
+                            }
+                        }
                     )
             })
             
